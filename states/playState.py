@@ -81,9 +81,9 @@ class State:
             pass;
         self.lastBeat = self.curBeat;
         
-        self.curStep = glm.floor((self.songPos/self.bpm)*10);
+        self.curStep = glm.floor((self.songPos/self.bpm)*4);
         if self.curStep != self.lastStep:
-            if self.curStep%4 == 0 and self.dadPosing == 0:
+            if self.curStep%2 == 0 and self.dadPosing == 0:
                 self.dadA = "idle";
                 self.dadF = 0;
         self.lastStep = self.curStep;
