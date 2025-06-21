@@ -1,0 +1,6 @@
+pygame
+moderngl
+numpy
+PyGLM
+sounddevice
+soundfile
