@@ -4,6 +4,7 @@ import json;
 from engine import screen as sc;
 from engine import sprites as spr;
 from engine import assets as ass;
+from engine import assets as tex;
 from engine import musicPlayer as mp;
 
 class State:
@@ -16,6 +17,10 @@ class State:
         self.acurasi = 0;
         self.acuCoun = 0;
         self.misses = 0;
+        self.lastBeat = 0;
+        self.curBeat = 0;
+        self.lastStep = 0;
+        self.curStep = 0;
         self.notePoses = []
         for i in range(4):
             self.notePoses.append(glm.vec2(50+120*i,30));
@@ -34,13 +39,13 @@ class State:
             else:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,note[1],note[2],True]);
+        self.bpm = chart["song"]["bpm"]*0.01666666666666666666666666666667;
         #cargar los assets
         fondo2load = [];
         sprites2load = [];
 
         with open('assets/characters/'+chart["song"]["player1"]+".json",'r') as file:
             bfJs = json.load(file);
-            
         self.bf = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         sprites2load.append(("bf" ,'assets/images/'+bfJs["image"]));
         
@@ -70,6 +75,18 @@ class State:
         if p_acept:
             self.mp.paused = False;
             self.songPos = 0;
+        #weas del beat
+        self.curBeat = glm.floor(self.songPos/self.bpm);
+        if self.curBeat != self.lastBeat:
+            pass;
+        self.lastBeat = self.curBeat;
+        
+        self.curStep = glm.floor((self.songPos/self.bpm)*10);
+        if self.curStep != self.lastStep:
+            if self.curStep%4 == 0 and self.dadPosing == 0:
+                self.dadA = "idle";
+                self.dadF = 0;
+        self.lastStep = self.curStep;
         #controles del jugador
         inputs = [p_L,p_D,p_U,p_R];
         for note in self.chart:
@@ -111,12 +128,24 @@ class State:
                 else:
                     if notePos < 0:
                         note[3] = False;
+                        self.dadPosing = 0.6;
+                        self.dadF = 0;
+                        if note[1] == 0:
+                            self.dadA = "singLEFT";
+                        elif note[1] == 1:
+                            self.dadA = "singDOWN";
+                        elif note[1] == 2:
+                            self.dadA = "singUP";
+                        elif note[1] == 3:
+                            self.dadA = "singRIGHT";
             
     def draw(self):
         #fondo mierdas
         
         #personajes mierdas
-        sc.render.draw_scale("dad",self.dadD[self.dadA][0],self.dadF,self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
+        self.dadPosing = max(self.dadPosing-sc.deltatime,0);
+        self.dadF = min(self.dadF+sc.deltatime*24,len(tex.sprites["dad"].anims[self.dadD[self.dadA][0]])-1);
+        sc.render.draw_scale("dad",self.dadD[self.dadA][0],int(glm.floor(self.dadF)),self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
         #hud mierdas
         finalAcur = 100;
         if self.acuCoun > 0:
