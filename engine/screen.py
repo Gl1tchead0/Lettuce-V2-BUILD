@@ -34,7 +34,7 @@ render = ren.Renderer();
 vcrTex = None;
 vcrSpr = None;
 
-song = "jit";
+song = "TomachiP";
 botplay = False;
 
 #pg.event.set_grab(True);
