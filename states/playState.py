@@ -21,6 +21,7 @@ class State:
         self.curBeat = 0;
         self.lastStep = 0;
         self.curStep = 0;
+        self.pressed = [];
         self.notePoses = []
         for i in range(4):
             self.notePoses.append(glm.vec2(50+120*i,30));
@@ -39,7 +40,7 @@ class State:
             else:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,note[1],note[2],True]);
-        self.bpm = chart["song"]["bpm"]*0.01666666666666666666666666666667;
+        self.bpm = chart["song"]["bpm"];
         #cargar los assets
         fondo2load = [];
         sprites2load = [];
@@ -48,6 +49,7 @@ class State:
             bfJs = json.load(file);
         self.bf = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         sprites2load.append(("bf" ,'assets/images/'+bfJs["image"]));
+        self.pressed.append([False,False,False,False]);
         
         #cargar al dad
         with open('assets/characters/'+chart["song"]["player2"]+".json",'r') as file:
@@ -61,6 +63,7 @@ class State:
         for anim in dadJs["animations"]:
             self.dadD[anim["anim"]] = (anim["name"],glm.vec2(anim["offsets"][0],anim["offsets"][1]));
         sprites2load.append(("dad",'assets/images/'+dadJs["image"]));
+        self.pressed.append([False,False,False,False]);
         
         sprites2load.append(("notes",'assets/images/NOTE_assets'));
 
@@ -76,17 +79,17 @@ class State:
             self.mp.paused = False;
             self.songPos = 0;
         #weas del beat
-        self.curBeat = glm.floor(self.songPos/self.bpm);
-        if self.curBeat != self.lastBeat:
-            pass;
-        self.lastBeat = self.curBeat;
-        
-        self.curStep = glm.floor((self.songPos/self.bpm)*4);
+        self.curStep = glm.floor((self.songPos*self.bpm)*0.01666666666666666666666666666667);
         if self.curStep != self.lastStep:
             if self.curStep%2 == 0 and self.dadPosing == 0:
                 self.dadA = "idle";
                 self.dadF = 0;
         self.lastStep = self.curStep;
+
+        self.curBeat = glm.floor(self.curStep*0.25);
+        if self.curBeat != self.lastBeat:
+            pass;
+        self.lastBeat = self.curBeat;
         #controles del jugador
         inputs = [p_L,p_D,p_U,p_R];
         for note in self.chart:
@@ -128,7 +131,7 @@ class State:
                 else:
                     if notePos < 0:
                         note[3] = False;
-                        self.dadPosing = 0.6;
+                        self.dadPosing = 0.4;
                         self.dadF = 0;
                         if note[1] == 0:
                             self.dadA = "singLEFT";
