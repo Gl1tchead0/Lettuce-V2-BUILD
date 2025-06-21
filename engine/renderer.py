@@ -146,6 +146,18 @@ class Renderer:
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
         
+    def draw_offset_scale(self, sprite, anima,index, position, scale, offset):
+        tex.textures[sprite].use(0);
+        
+        model = glm.translate(glm.mat4(),glm.vec3(position,0));
+        model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
+        model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["trans"].write(model);
+        
+        self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
+        self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
+        self.shaders[self.shaind].render();
+
     def draw_transformed(self, sprite, anima, index, position, angle, scale, offset=glm.vec2(0,0), radians=False):
         tex.textures[sprite].use(0);
         

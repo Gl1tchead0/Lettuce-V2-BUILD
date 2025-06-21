@@ -104,7 +104,7 @@
 	"no_antialiasing": false,
 	"image": "characters/draw",
 	"position": [
-		-150,
+		500,
 		100
 	],
 	"healthicon": "draw",

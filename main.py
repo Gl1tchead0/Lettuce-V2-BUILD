@@ -44,10 +44,10 @@ if __name__ == '__main__':
             if event.type == pg.QUIT:
                 sys.exit();
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_w:p_U = True;
-                if event.key == pg.K_s:p_D = True;
-                if event.key == pg.K_a:p_L = True;
-                if event.key == pg.K_d:p_R = True;
+                if event.key == pg.K_d:p_U = True;
+                if event.key == pg.K_f:p_D = True;
+                if event.key == pg.K_j:p_L = True;
+                if event.key == pg.K_k:p_R = True;
                 if event.key == pg.K_UP:p_U = True;
                 if event.key == pg.K_DOWN:p_D = True;
                 if event.key == pg.K_LEFT:p_L = True;
