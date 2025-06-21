@@ -197,15 +197,15 @@ class State:
             
     def draw(self):
         #fondo mierdas
-        
+        sc.render.cam.z += sc.deltatime;
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
         self.bfF = min(self.bfF+sc.deltatime*24,len(tex.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
-        sc.render.draw_scale("bf",self.bfD[self.bfA][0],int(glm.floor(self.bfF)),self.bfP,glm.vec2(self.bfS),suboffset=self.bfD[self.bfA][1])
+        sc.render.draw_cam_scale("bf",self.bfD[self.bfA][0],int(glm.floor(self.bfF)),self.bfP,glm.vec2(self.bfS),suboffset=self.bfD[self.bfA][1])
 
         self.dadPosing = max(self.dadPosing-sc.deltatime,0);
         self.dadF = min(self.dadF+sc.deltatime*24,len(tex.sprites["dad"].anims[self.dadD[self.dadA][0]])-1);
-        sc.render.draw_scale("dad",self.dadD[self.dadA][0],int(glm.floor(self.dadF)),self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
+        sc.render.draw_cam_scale("dad",self.dadD[self.dadA][0],int(glm.floor(self.dadF)),self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
         #hud mierdas
         finalAcur = 100;
         if self.acuCoun > 0:

@@ -14,6 +14,8 @@ class Renderer:
         vertex_data = self.get_data(vertices=vertexs,indices=indices);
         simvbo = sc.ctx.buffer(vertex_data);
         vbo = sc.ctx.buffer(np.hstack([vertex_data,vertex_data]));
+
+        self.cam = glm.vec4(0,0,0,1);
         
         self.shaders = {};
         self.shaind = "sprite";
@@ -131,13 +133,25 @@ class Renderer:
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
         
-    def draw_scale(self, sprite, anima,index, position, scale, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0),usecam=True):
+    def draw_scale(self, sprite, anima,index, position, scale, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0)):
+        tex.textures[sprite].use(0);
+
+        model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset,0));
+        model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
+        model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["trans"].write(model);
+        
+        self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
+        self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
+        self.shaders[self.shaind].render();
+    
+    def draw_cam_scale(self, sprite, anima,index, position, scale, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0)):
         tex.textures[sprite].use(0);
         
-        if usecam:
-            model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset,0));
-        else:
-            model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset,0));
+        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
+        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
+        model = glm.translate(model,glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset-self.cam.xy-glm.vec2(640,480),0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
         self.shaders[self.shaind].program["trans"].write(model);
