@@ -79,16 +79,16 @@ class State:
             self.mp.paused = False;
             self.songPos = 0;
         #weas del beat
-        self.curStep = glm.floor((self.songPos*self.bpm)*0.01666666666666666666666666666667);
+        self.curStep = glm.floor((semiSongPos*self.bpm)*0.01666666666666666666666666666667);
         if self.curStep != self.lastStep:
-            if self.curStep%2 == 0 and self.dadPosing == 0:
-                self.dadA = "idle";
-                self.dadF = 0;
+            pass;
         self.lastStep = self.curStep;
 
         self.curBeat = glm.floor(self.curStep*0.25);
         if self.curBeat != self.lastBeat:
-            pass;
+            if self.dadPosing == 0:
+                self.dadA = "idle";
+                self.dadF = 0;
         self.lastBeat = self.curBeat;
         #controles del jugador
         inputs = [p_L,p_D,p_U,p_R];
