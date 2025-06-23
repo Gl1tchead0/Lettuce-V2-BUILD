@@ -7,6 +7,7 @@ from engine import sprites as spr;
 from engine import assets as ass;
 from engine import assets as tex;
 from engine import musicPlayer as mp;
+import importlib as il;
 
 class State:
     def __init__(self):
@@ -22,6 +23,8 @@ class State:
         self.curBeat = 0;
         self.lastStep = 0;
         self.curStep = 0;
+        self.camGame = glm.vec4(0,0,0,1);
+        self.hudZoom = 1;
         self.pressed = [];
         self.notePoses = []
         for i in range(4):
@@ -32,16 +35,22 @@ class State:
     def load(self):
         #cargar chart
         self.chart = [];
+        self.longChart = [];
         with open('assets/songs/'+sc.song+"/chart.json",'r') as file:
             chart = json.load(file);
         for sect in chart["song"]["notes"]:
             if sect["mustHitSection"]:
                 for note in sect["sectionNotes"]:
-                    self.chart.append([note[0]*0.001,note[1],note[2],True]);
+                    self.chart.append([note[0]*0.001,note[1],True]);
+                    if note[2] > 0:
+                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],True]);
             else:
                 for note in sect["sectionNotes"]:
-                    self.chart.append([note[0]*0.001,(note[1]+4)%8,note[2],True]);
+                    self.chart.append([note[0]*0.001,(note[1]+4)%8,True]);
+                    if note[2] > 0:
+                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,True]);
         self.bpm = chart["song"]["bpm"];
+        self.stage = il.import_module("stages."+chart["song"]["stage"]).Stage();
 
         self.missS = []
         self.missS.append(pg.mixer.Sound("assets/sounds/missnote1.ogg"));
@@ -99,6 +108,8 @@ class State:
 
         self.curBeat = glm.floor(self.curStep*0.25);
         if self.curBeat != self.lastBeat:
+            if self.curBeat % 2 == 0:
+                self.hudZoom = 1.05;
             if self.dadPosing == 0:
                 self.dadA = "idle";
                 self.dadF = 0;
@@ -122,11 +133,16 @@ class State:
             if inputsP[i] and self.pressed[i] >= 0:
                 self.pressed[i] = 1;
 
-        for note in self.chart:
+        #notas largas
+        for note in self.longChart:
             if note[3]:
-                notePos = (note[0]-self.songPos)*5;
+                pass;
+        #notas simples
+        for note in self.chart:
+            if note[2]:
+                notePos = (note[0]-self.songPos)*10;
                 if notePos < -1:
-                    note[3] = False;
+                    note[2] = False;
                     self.missS[ran.randint(0,2)].play();
                     self.acurasi += 0;
                     self.acuCoun += 1;
@@ -144,7 +160,7 @@ class State:
                 elif note[1] < 4:
                     notePos = abs(notePos);
                     if inputs[note[1]] and notePos < 1:
-                        note[3] = False;
+                        note[2] = False;
                         self.pressed[note[1]] = -1;
                         inputs[note[1]] = False;
                         self.score += glm.floor(350*notePos);
@@ -182,7 +198,7 @@ class State:
                             self.bfA = "singRIGHT";
                 else:
                     if notePos < 0:
-                        note[3] = False;
+                        note[2] = False;
                         self.pressed[note[1]] = -1;
                         self.dadPosing = 0.4;
                         self.dadF = 0;
@@ -194,10 +210,12 @@ class State:
                             self.dadA = "singUP";
                         elif note[1]-4 == 3:
                             self.dadA = "singRIGHT";
+        #zooms del hud
+        self.hudZoom += (1-self.hudZoom)*(0.05*(sc.deltatime*60));
             
     def draw(self):
         #fondo mierdas
-        sc.render.cam.z += sc.deltatime;
+        sc.render.cam = self.camGame;
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
         self.bfF = min(self.bfF+sc.deltatime*24,len(tex.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
@@ -207,21 +225,44 @@ class State:
         self.dadF = min(self.dadF+sc.deltatime*24,len(tex.sprites["dad"].anims[self.dadD[self.dadA][0]])-1);
         sc.render.draw_cam_scale("dad",self.dadD[self.dadA][0],int(glm.floor(self.dadF)),self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
         #hud mierdas
+        sc.render.cam = glm.vec4(0,0,0,self.hudZoom);
         finalAcur = 100;
         if self.acuCoun > 0:
             finalAcur = (self.acurasi/self.acuCoun)*100;
-        sc.render.draw_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+        sc.render.draw_cam_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
         
         notesNames = ["arrowLEFT","arrowDOWN","arrowUP","arrowRIGHT","left press","down press","up press","right press","left confirm","down confirm","up confirm","right confirm"];
         for i in range(len(self.notePoses)):
             if self.pressed[i] == 0:
-                sc.render.draw_offset_scale("notes",notesNames[i%4],0,self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+                sc.render.draw_cam_offset_scale("notes",notesNames[i%4],0,self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
             elif self.pressed[i] > 0:
-                sc.render.draw_offset_scale("notes",notesNames[i%4+4],int(glm.floor(self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+                sc.render.draw_cam_offset_scale("notes",notesNames[i%4+4],int(glm.floor(self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
             else:
-                sc.render.draw_offset_scale("notes",notesNames[i%4+8],int(glm.floor(-self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+                sc.render.draw_cam_offset_scale("notes",notesNames[i%4+8],int(glm.floor(-self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+        notesNames = ["purple hold piece","blue hold piece","green hold piece","red hold piece","pruple end hold","blue hold end","green hold end","red hold end"];
+        for note in self.longChart:
+            if note[3]:
+                posy1 = (note[0]-self.songPos)*1000;
+                posy2 = (note[1]-self.songPos)*1000;
+                anima1 = notesNames[note[2]%4]
+                anima2 = notesNames[note[2]%4+4]
+                scale = glm.vec2(0.8,posy2-posy1);
+                position = self.notePoses[note[2]]+self.stage.modChart(posy1);
+                tex.textures["notes"].use(0);
+        
+                model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+                model = glm.scale(model,glm.vec3(sc.render.cam.w,sc.render.cam.w,1));
+                model = glm.rotate(model,sc.render.cam.z,glm.vec3(0,0,1))
+                model = glm.translate(model,glm.vec3(position-sc.render.cam.xy-glm.vec2(640,480),0));
+                model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
+                model = glm.translate(model,glm.vec3(-0.5,0,0));
+                sc.render.shaders["longNote"].program["trans"].write(model);
+                sc.render.shaders["longNote"].program["rep"].write(glm.float32(scale.y/(tex.sprites["notes"].anims[anima1][0].rwh.y*scale.x)));
+                sc.render.shaders["longNote"].program["img1"].write(glm.vec4(tex.sprites["notes"].anims[anima1][0].xy,tex.sprites["notes"].anims[anima1][0].wh));
+                sc.render.shaders["longNote"].program["img2"].write(glm.vec4(tex.sprites["notes"].anims[anima2][0].xy,tex.sprites["notes"].anims[anima2][0].wh));
+                sc.render.shaders["longNote"].render();
         notesNames = ["purple","blue","green","red","purple","blue","green","red"];
         for note in self.chart:
-            notePos = note[0]-self.songPos;
-            if note[3]:
-                sc.render.draw_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+glm.vec2(0,notePos*1000),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+            if note[2]:
+                notePos = note[0]-self.songPos;
+                sc.render.draw_cam_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+self.stage.modChart(notePos*1000),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));

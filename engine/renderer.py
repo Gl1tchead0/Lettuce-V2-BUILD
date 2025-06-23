@@ -71,7 +71,7 @@ class Renderer:
     def draw_screen(self, tex):
         tex.use(0);
         self.shaders["screen"].render();
-            
+    
     def draw_text(self, font, text, position, color, sep,scale=32,aling="left"):
         if aling == "center":
             position.x -= (len(text)*sep-sep+scale)*0.5;
@@ -100,6 +100,47 @@ class Renderer:
                 if anima != " ":
                     pos = glm.vec2(position.x+i*sep,position.y);
                     model = glm.translate(glm.mat4(),glm.vec3(pos-font.anims[anima][0].offset,0));
+                    model = glm.scale(model,glm.vec3(glm.abs(font.anims[anima][0].rwh.x)*scale,glm.abs(font.anims[anima][0].rwh.y)*scale,1));
+                    self.shaders["font"].program["trans"].write(model);
+                    self.shaders["font"].program["color"].write(color);
+                    self.shaders["font"].program["pos"].write(font.anims[anima][0].xy);
+                    self.shaders["font"].program["size"].write(font.anims[anima][0].wh);
+                    self.shaders["font"].render();
+            
+    def draw_cam_text(self, font, text, position, color, sep,scale=32,aling="left"):
+        if aling == "center":
+            position.x -= (len(text)*sep-sep+scale)*0.5;
+        if aling == "right":
+            position.x -= len(text)*sep-sep+scale;
+            
+        if font == None:
+            sc.vcrTex.use(0);
+            texto = list(text);
+            for i in range(len(texto)):
+                anima = texto[i];
+                if anima != " ":
+                    pos = glm.vec2(position.x+i*sep,position.y);
+                    model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+                    model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
+                    model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1));
+                    model = glm.translate(model,glm.vec3(pos-sc.vcrSpr.anims[anima][0].offset-glm.vec2(640,480),0));
+                    model = glm.scale(model,glm.vec3(scale,scale,1));
+                    self.shaders["font"].program["trans"].write(model);
+                    self.shaders["font"].program["color"].write(color);
+                    self.shaders["font"].program["pos"].write(sc.vcrSpr.anims[anima][0].xy);
+                    self.shaders["font"].program["size"].write(sc.vcrSpr.anims[anima][0].wh);
+                    self.shaders["font"].render();
+        else:
+            tex.textures[font.tex].use(0);
+            texto = list(text);
+            for i in range(len(texto)):
+                anima = texto[i];
+                if anima != " ":
+                    pos = glm.vec2(position.x+i*sep,position.y);
+                    model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+                    model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
+                    model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1));
+                    model = glm.translate(model,glm.vec3(pos-font.anims[anima][0].offset-glm.vec2(640,480),0));
                     model = glm.scale(model,glm.vec3(glm.abs(font.anims[anima][0].rwh.x)*scale,glm.abs(font.anims[anima][0].rwh.y)*scale,1));
                     self.shaders["font"].program["trans"].write(model);
                     self.shaders["font"].program["color"].write(color);
@@ -164,6 +205,21 @@ class Renderer:
         tex.textures[sprite].use(0);
         
         model = glm.translate(glm.mat4(),glm.vec3(position,0));
+        model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
+        model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["trans"].write(model);
+        
+        self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
+        self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
+        self.shaders[self.shaind].render();
+    
+    def draw_cam_offset_scale(self, sprite, anima,index, position, scale, offset):
+        tex.textures[sprite].use(0);
+        
+        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
+        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
+        model = glm.translate(model,glm.vec3(position,0)-glm.vec3(640,480,0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
         self.shaders[self.shaind].program["trans"].write(model);
