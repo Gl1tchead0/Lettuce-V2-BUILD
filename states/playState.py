@@ -36,20 +36,36 @@ class State:
         #cargar chart
         self.chart = [];
         self.longChart = [];
+        mustHitSection = False;
         with open('assets/songs/'+sc.song+"/chart.json",'r') as file:
             chart = json.load(file);
+        with open('assets/characters/'+chart["song"]["player1"]+".json",'r') as file:
+            bfJs = json.load(file);
+        with open('assets/characters/'+chart["song"]["player2"]+".json",'r') as file:
+            dadJs = json.load(file);
+        self.events = chart["song"]["events"];
+        self.curEven = 0;
+        self.bpm = chart["song"]["bpm"];i = 0;
         for sect in chart["song"]["notes"]:
             if sect["mustHitSection"]:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,note[1],True]);
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],1]);
+                if mustHitSection != sect["mustHitSection"]:
+                    self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                                        [["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
             else:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,(note[1]+4)%8,True]);
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,1]);
-        self.bpm = chart["song"]["bpm"];
+                if mustHitSection != sect["mustHitSection"]:
+                    self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                                        [["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
+            mustHitSection = sect["mustHitSection"];
+            i += 1;
+        sorted(self.events,key=lambda x: x[0], reverse=True);
         self.stage = il.import_module("stages."+chart["song"]["stage"]).Stage();
 
         self.missS = []
@@ -60,8 +76,6 @@ class State:
         fondo2load = [];
         sprites2load = [];
 
-        with open('assets/characters/'+chart["song"]["player1"]+".json",'r') as file:
-            bfJs = json.load(file);
         self.bfP = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         self.bfS = bfJs["scale"];
         self.bfD = {};
@@ -74,8 +88,6 @@ class State:
         self.pressed.append(0);self.pressed.append(0);self.pressed.append(0);self.pressed.append(0);
         
         #cargar al dad
-        with open('assets/characters/'+chart["song"]["player2"]+".json",'r') as file:
-            dadJs = json.load(file);
         self.dadP = glm.vec2(dadJs["position"][0],dadJs["position"][1]);
         self.dadS = dadJs["scale"];
         self.dadD = {};
@@ -99,6 +111,7 @@ class State:
         
         if p_acept:
             self.mp.paused = False;
+            self.curEven = 0;
             self.songPos = 0;
         #weas del beat
         self.curStep = glm.floor((semiSongPos*self.bpm)*0.01666666666666666666666666666667);
@@ -140,38 +153,55 @@ class State:
                 if notePos < -1 and note[3] == 1:
                     note[3] = 0;
                 elif note[2] < 4:
-                    notePos = abs(notePos);
-                    if inputsP[note[2]] and notePos < 1:
-                        note[3] = 2;
-                    if note[3] == 2:
-                        if not inputsP[note[2]]:
+                    if sc.botplay:
+                        if notePos <= 0:
+                            note[3] = 2;
+                            self.pressed[note[2]] = -1;
+                            self.bfPosing = 0.25;
+                            self.bfF = 0;
+                            if note[2]-4 == 0:
+                                self.bfA = "singLEFT";
+                            elif note[2]-4 == 1:
+                                self.bfA = "singDOWN";
+                            elif note[2]-4 == 2:
+                                self.bfA = "singUP";
+                            elif note[2]-4 == 3:
+                                self.bfA = "singRIGHT";
+                        if (note[1]-self.songPos)*10 <= 0:
                             note[3] = 0;
-                            if (note[1]-self.songPos)*10 > 0:
-                                self.missS[ran.randint(0,2)].play();
-                                self.acurasi += 0;
-                                self.acuCoun += 1;
-                                self.misses += 1;
-                                self.bfPosing = 0.25;
-                                self.bfF = 0;
-                                if note[2] == 0:
-                                    self.bfA = "singLEFTmiss";
-                                elif note[2] == 1:
-                                    self.bfA = "singDOWNmiss";
-                                elif note[2] == 2:
-                                    self.bfA = "singUPmiss";
-                                elif note[2] == 3:
-                                    self.bfA = "singRIGHTmiss";
-                        self.pressed[note[2]] = -1;
-                        self.bfPosing = 0.25;
-                        self.bfF = 0;
-                        if note[2] == 0:
-                            self.bfA = "singLEFT";
-                        elif note[2] == 1:
-                            self.bfA = "singDOWN";
-                        elif note[2] == 2:
-                            self.bfA = "singUP";
-                        elif note[2] == 3:
-                            self.bfA = "singRIGHT";
+                    else:
+                        notePos = abs(notePos);
+                        if inputsP[note[2]] and notePos < 1:
+                            note[3] = 2;
+                        if note[3] == 2:
+                            if not inputsP[note[2]]:
+                                note[3] = 0;
+                                if (note[1]-self.songPos)*10 > 0:
+                                    self.missS[ran.randint(0,2)].play();
+                                    self.acurasi += 0;
+                                    self.acuCoun += 1;
+                                    self.misses += 1;
+                                    self.bfPosing = 0.25;
+                                    self.bfF = 0;
+                                    if note[2] == 0:
+                                        self.bfA = "singLEFTmiss";
+                                    elif note[2] == 1:
+                                        self.bfA = "singDOWNmiss";
+                                    elif note[2] == 2:
+                                        self.bfA = "singUPmiss";
+                                    elif note[2] == 3:
+                                        self.bfA = "singRIGHTmiss";
+                            self.pressed[note[2]] = -1;
+                            self.bfPosing = 0.25;
+                            self.bfF = 0;
+                            if note[2] == 0:
+                                self.bfA = "singLEFT";
+                            elif note[2] == 1:
+                                self.bfA = "singDOWN";
+                            elif note[2] == 2:
+                                self.bfA = "singUP";
+                            elif note[2] == 3:
+                                self.bfA = "singRIGHT";
                 else:
                     if notePos <= 0:
                         note[3] = 2;
@@ -209,44 +239,59 @@ class State:
                     elif note[1] == 3:
                         self.bfA = "singRIGHTmiss";
                 elif note[1] < 4:
-                    notePos = abs(notePos);
-                    if inputs[note[1]] and notePos < 1:
-                        note[2] = False;
-                        self.pressed[note[1]] = -1;
-                        inputs[note[1]] = False;
-                        self.score += glm.floor(350*notePos);
-                        self.acurasi += 1-notePos;
-                        self.acuCoun += 1;
-                        if notePos > 0.8:
-                            print("You Suck!");
-                        elif notePos > 0.6:
-                            print("Shit");
-                        elif notePos > 0.5:
-                            print("Bad");
-                        elif notePos > 0.4:
-                            print("Bruh");
-                        elif notePos > 0.31:
-                            print("Meh");
-                        elif notePos > 0.3:
-                            print("Nice");
-                        elif notePos > 0.2:
-                            print("Good");
-                        elif notePos > 0.1:
-                            print("Great");
-                        elif notePos > 0:
-                            print("Sick!");
-                        else:
-                            print("Perfect!!");
-                        self.bfPosing = 0.25;
-                        self.bfF = 0;
-                        if note[1] == 0:
-                            self.bfA = "singLEFT";
-                        elif note[1] == 1:
-                            self.bfA = "singDOWN";
-                        elif note[1] == 2:
-                            self.bfA = "singUP";
-                        elif note[1] == 3:
-                            self.bfA = "singRIGHT";
+                    if sc.botplay:
+                        if notePos < 0:
+                            note[2] = False;
+                            self.pressed[note[1]] = -1;
+                            self.bfPosing = 0.25;
+                            self.bfF = 0;
+                            if note[1] == 0:
+                                self.bfA = "singLEFT";
+                            elif note[1] == 1:
+                                self.bfA = "singDOWN";
+                            elif note[1] == 2:
+                                self.bfA = "singUP";
+                            elif note[1] == 3:
+                                self.bfA = "singRIGHT";
+                    else:
+                        notePos = abs(notePos);
+                        if inputs[note[1]] and notePos < 1:
+                            note[2] = False;
+                            self.pressed[note[1]] = -1;
+                            inputs[note[1]] = False;
+                            self.score += glm.floor(350*notePos);
+                            self.acurasi += 1-notePos;
+                            self.acuCoun += 1;
+                            if notePos > 0.8:
+                                print("You Suck!");
+                            elif notePos > 0.6:
+                                print("Shit");
+                            elif notePos > 0.5:
+                                print("Bad");
+                            elif notePos > 0.4:
+                                print("Bruh");
+                            elif notePos > 0.31:
+                                print("Meh");
+                            elif notePos > 0.3:
+                                print("Nice");
+                            elif notePos > 0.2:
+                                print("Good");
+                            elif notePos > 0.1:
+                                print("Great");
+                            elif notePos > 0:
+                                print("Sick!");
+                            else:
+                                print("Perfect!!");
+                            self.bfPosing = 0.25;
+                            self.bfF = 0;
+                            if note[1] == 0:
+                                self.bfA = "singLEFT";
+                            elif note[1] == 1:
+                                self.bfA = "singDOWN";
+                            elif note[1] == 2:
+                                self.bfA = "singUP";
+                            elif note[1] == 3:
+                                self.bfA = "singRIGHT";
                 else:
                     if notePos < 0:
                         note[2] = False;
@@ -261,12 +306,20 @@ class State:
                             self.dadA = "singUP";
                         elif note[1]-4 == 3:
                             self.dadA = "singRIGHT";
+        #eventos we
+        if self.curEven < len(self.events):
+            if self.events[self.curEven][0] < self.songPos:
+                for even in self.events[self.curEven][1]:
+                    self.stage.onEvent(even[0],even[1],even[2]);
+                self.curEven += 1;
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(0.05*(sc.deltatime*60));
+        self.stage.update();
             
     def draw(self):
         #fondo mierdas
         sc.render.cam = self.camGame;
+        self.stage.draw();
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
         self.bfF = min(self.bfF+sc.deltatime*24,len(tex.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
@@ -281,7 +334,8 @@ class State:
         if self.acuCoun > 0:
             finalAcur = (self.acurasi/self.acuCoun)*100;
         sc.render.draw_cam_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
-        
+        if sc.botplay:
+            sc.render.draw_cam_text(None,"(BOTPLAY)",glm.vec2(640,30),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
         notesNames = ["arrowLEFT","arrowDOWN","arrowUP","arrowRIGHT","left press","down press","up press","right press","left confirm","down confirm","up confirm","right confirm"];
         for i in range(len(self.notePoses)):
             if self.pressed[i] == 0:
