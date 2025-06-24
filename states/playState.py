@@ -148,7 +148,7 @@ class State:
         #notas largas
         for note in self.longChart:
             if note[3]:
-                notePos = (note[0]-self.songPos)*10;
+                notePos = (note[0]-self.songPos)*5;
                 if notePos < -1 and note[3] == 1:
                     note[3] = 0;
                 elif note[2] < 4:
@@ -166,7 +166,7 @@ class State:
                                 self.bfA = "singUP";
                             elif note[2]-4 == 3:
                                 self.bfA = "singRIGHT";
-                        if (note[1]-self.songPos)*10 <= 0:
+                        if (note[1]-self.songPos)*5 <= 0:
                             note[3] = 0;
                     else:
                         notePos = abs(notePos);
@@ -175,7 +175,7 @@ class State:
                         if note[3] == 2:
                             if not inputsP[note[2]]:
                                 note[3] = 0;
-                                if (note[1]-self.songPos-1)*10 > 0:
+                                if (note[1]-self.songPos-1)*5 > 0:
                                     self.missS[ran.randint(0,2)].play();
                                     self.acurasi += 0;
                                     self.acuCoun += 1;
@@ -220,7 +220,7 @@ class State:
         #notas simples
         for note in self.chart:
             if note[2]:
-                notePos = (note[0]-self.songPos)*10;
+                notePos = (note[0]-self.songPos)*5;
                 if notePos < -1 and not sc.botplay:
                     note[2] = False;
                     self.missS[ran.randint(0,2)].play();
