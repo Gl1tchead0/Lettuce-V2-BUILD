@@ -54,7 +54,7 @@ class State:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],1]);
                 if mustHitSection != sect["mustHitSection"]:
                     self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
-                                        [["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
+                                        [["Change look",True,0],["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
             else:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,(note[1]+4)%8,True]);
@@ -62,7 +62,7 @@ class State:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,1]);
                 if mustHitSection != sect["mustHitSection"]:
                     self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
-                                        [["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
+                                        [["Change look",False,0],["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
             mustHitSection = sect["mustHitSection"];
             i += 1;
         sorted(self.events,key=lambda x: x[0], reverse=True);
@@ -222,7 +222,7 @@ class State:
         for note in self.chart:
             if note[2]:
                 notePos = (note[0]-self.songPos)*10;
-                if notePos < -1:
+                if notePos < -1 and not sc.botplay:
                     note[2] = False;
                     self.missS[ran.randint(0,2)].play();
                     self.acurasi += 0;
