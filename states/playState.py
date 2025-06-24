@@ -43,12 +43,12 @@ class State:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,note[1],True]);
                     if note[2] > 0:
-                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],True]);
+                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],1]);
             else:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,(note[1]+4)%8,True]);
                     if note[2] > 0:
-                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,True]);
+                        self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,1]);
         self.bpm = chart["song"]["bpm"];
         self.stage = il.import_module("stages."+chart["song"]["stage"]).Stage();
 
@@ -136,7 +136,58 @@ class State:
         #notas largas
         for note in self.longChart:
             if note[3]:
-                pass;
+                notePos = (note[0]-self.songPos)*10;
+                if notePos < -1 and note[3] == 1:
+                    note[3] = 0;
+                elif note[2] < 4:
+                    notePos = abs(notePos);
+                    if inputsP[note[2]] and notePos < 1:
+                        note[3] = 2;
+                    if note[3] == 2:
+                        if not inputsP[note[2]]:
+                            note[3] = 0;
+                            if (note[1]-self.songPos)*10 > 0:
+                                self.missS[ran.randint(0,2)].play();
+                                self.acurasi += 0;
+                                self.acuCoun += 1;
+                                self.misses += 1;
+                                self.bfPosing = 0.25;
+                                self.bfF = 0;
+                                if note[2] == 0:
+                                    self.bfA = "singLEFTmiss";
+                                elif note[2] == 1:
+                                    self.bfA = "singDOWNmiss";
+                                elif note[2] == 2:
+                                    self.bfA = "singUPmiss";
+                                elif note[2] == 3:
+                                    self.bfA = "singRIGHTmiss";
+                        self.pressed[note[2]] = -1;
+                        self.bfPosing = 0.25;
+                        self.bfF = 0;
+                        if note[2] == 0:
+                            self.bfA = "singLEFT";
+                        elif note[2] == 1:
+                            self.bfA = "singDOWN";
+                        elif note[2] == 2:
+                            self.bfA = "singUP";
+                        elif note[2] == 3:
+                            self.bfA = "singRIGHT";
+                else:
+                    if notePos <= 0:
+                        note[3] = 2;
+                        self.pressed[note[2]] = -1;
+                        self.dadPosing = 0.25;
+                        self.dadF = 0;
+                        if note[2]-4 == 0:
+                            self.dadA = "singLEFT";
+                        elif note[2]-4 == 1:
+                            self.dadA = "singDOWN";
+                        elif note[2]-4 == 2:
+                            self.dadA = "singUP";
+                        elif note[2]-4 == 3:
+                            self.dadA = "singRIGHT";
+                    if (note[1]-self.songPos)*10 <= 0:
+                        note[3] = 0;
         #notas simples
         for note in self.chart:
             if note[2]:
@@ -147,7 +198,7 @@ class State:
                     self.acurasi += 0;
                     self.acuCoun += 1;
                     self.misses += 1;
-                    self.bfPosing = 0.4;
+                    self.bfPosing = 0.25;
                     self.bfF = 0;
                     if note[1] == 0:
                         self.bfA = "singLEFTmiss";
@@ -186,7 +237,7 @@ class State:
                             print("Sick!");
                         else:
                             print("Perfect!!");
-                        self.bfPosing = 0.4;
+                        self.bfPosing = 0.25;
                         self.bfF = 0;
                         if note[1] == 0:
                             self.bfA = "singLEFT";
@@ -200,7 +251,7 @@ class State:
                     if notePos < 0:
                         note[2] = False;
                         self.pressed[note[1]] = -1;
-                        self.dadPosing = 0.4;
+                        self.dadPosing = 0.25;
                         self.dadF = 0;
                         if note[1]-4 == 0:
                             self.dadA = "singLEFT";
@@ -257,6 +308,10 @@ class State:
                 model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
                 model = glm.translate(model,glm.vec3(-0.5,0,0));
                 sc.render.shaders["longNote"].program["trans"].write(model);
+                if note[3] == 2:
+                    sc.render.shaders["longNote"].program["cut"].write(glm.float32(min(1,max(-posy1/(posy2-posy1),0))));
+                else:
+                    sc.render.shaders["longNote"].program["cut"].write(glm.float32(0));
                 sc.render.shaders["longNote"].program["rep"].write(glm.float32(scale.y/(tex.sprites["notes"].anims[anima1][0].rwh.y*scale.x)));
                 sc.render.shaders["longNote"].program["img1"].write(glm.vec4(tex.sprites["notes"].anims[anima1][0].xy,tex.sprites["notes"].anims[anima1][0].wh));
                 sc.render.shaders["longNote"].program["img2"].write(glm.vec4(tex.sprites["notes"].anims[anima2][0].xy,tex.sprites["notes"].anims[anima2][0].wh));
