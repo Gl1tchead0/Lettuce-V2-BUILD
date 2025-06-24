@@ -175,7 +175,7 @@ class State:
                         if note[3] == 2:
                             if not inputsP[note[2]]:
                                 note[3] = 0;
-                                if (note[1]-self.songPos-1)*5 > 0:
+                                if (note[1]-self.songPos-0.2)*5 > 0:
                                     self.missS[ran.randint(0,2)].play();
                                     self.acurasi += 0;
                                     self.acuCoun += 1;
