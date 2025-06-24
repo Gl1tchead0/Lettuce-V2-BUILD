@@ -28,9 +28,9 @@ class State:
         self.pressed = [];
         self.notePoses = []
         for i in range(4):
-            self.notePoses.append(glm.vec2(812+120*i,92));
+            self.notePoses.append(glm.vec2(772+130*i,92));
         for i in range(4):
-            self.notePoses.append(glm.vec2(112+120*i,92));
+            self.notePoses.append(glm.vec2(112+130*i,92));
         self.noteVector = glm.vec2(0,0);
     def load(self):
         #cargar chart
@@ -73,8 +73,7 @@ class State:
         self.missS.append(pg.mixer.Sound("assets/sounds/missnote2.ogg"));
         self.missS.append(pg.mixer.Sound("assets/sounds/missnote3.ogg"));
         #cargar los assets
-        fondo2load = [];
-        sprites2load = [];
+        fondo2load,sprites2load = self.stage.load();
 
         self.bfP = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         self.bfS = bfJs["scale"];
@@ -176,7 +175,7 @@ class State:
                         if note[3] == 2:
                             if not inputsP[note[2]]:
                                 note[3] = 0;
-                                if (note[1]-self.songPos)*10 > 0:
+                                if (note[1]-self.songPos-1)*10 > 0:
                                     self.missS[ran.randint(0,2)].play();
                                     self.acurasi += 0;
                                     self.acuCoun += 1;

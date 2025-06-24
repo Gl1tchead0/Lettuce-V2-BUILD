@@ -9,7 +9,12 @@ class Stage:
         self.lookBF = True;
         self.cmo = glm.vec2(0);
     def load(self):
-        pass;
+        fondo2load = [];
+        sprites2load = [];
+        fondo2load.append(("piso" ,'assets/images/tomachiFondo/pisoPisoRap.png'));
+        fondo2load.append(("arbustos" ,'assets/images/tomachiFondo/pisoRap.png'));
+        fondo2load.append(("fuente" ,'assets/images/tomachiFondo/fuente_y_cartel.png'));
+        return fondo2load,sprites2load;
     def update(self):
         #weas de la camara
         if self.lookBF:
@@ -39,7 +44,8 @@ class Stage:
         sc.state.camGame.xy = self.cmp + self.cmr * glm.cos(self.cmf) + self.cmo;
         sc.state.camGame.w = 0.6;
     def draw(self):
-        pass;
+        sc.render.s_rect(glm.vec2(0),glm.vec2(1280,720),glm.vec4(1,1,1,1));
+        sc.render.draw_cam_background("piso",glm.vec2(-600,500));
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;

@@ -158,14 +158,25 @@ class Renderer:
         self.shaders[self.shaind].program["size"].write(glm.vec2(1,1));
         
         self.shaders[self.shaind].render();
+        
+    def draw_cam_background(self, fondo,position):
+        tex.textures[fondo].use(0);
+        
+        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
+        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
+        model = glm.translate(model,glm.vec3(position-self.cam.xy-glm.vec2(640,480),0));
+        model = glm.scale(model,glm.vec3(tex.textures[fondo].size[0],tex.textures[fondo].size[1],1));
+        self.shaders[self.shaind].program["trans"].write(model);
+        self.shaders[self.shaind].program["pos"].write(glm.vec2(0,0));
+        self.shaders[self.shaind].program["size"].write(glm.vec2(1,1));
+        
+        self.shaders[self.shaind].render();
     
-    def draw(self, sprite, anima,index, position, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0),usecam=True):
+    def draw(self, sprite, anima,index, position, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0)):
         tex.textures[sprite].use(0);
         
-        if usecam:
-            model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset-suboffset,0));
-        else:
-            model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset-suboffset,0));
+        model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset-suboffset,0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x),glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y),1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
         self.shaders[self.shaind].program["trans"].write(model);

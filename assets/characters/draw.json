@@ -104,7 +104,7 @@
 	"no_antialiasing": false,
 	"image": "characters/draw",
 	"position": [
-		500,
+		700,
 		100
 	],
 	"healthicon": "draw",
@@ -115,7 +115,7 @@
 		161
 	],
 	"camera_position": [
-		80,
+		200,
 		130
 	],
 	"sing_duration": 4,

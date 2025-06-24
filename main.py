@@ -9,16 +9,16 @@ import importlib as il;
 
 def refresh():
     #draw
-    sc.ctx.clear();
+    #sc.ctx.clear();
     sc.screen_fbo.use();
-    sc.ctx.clear(color=(1,1,1));
+    #sc.ctx.clear(color=(0,0,0));
     sc.state.draw();
     sc.render.draw_text(None,"FPS:"+str(int(glm.floor(sc.clock.get_fps()))),glm.vec2(0,0),glm.vec3(0.7,0.7,0.7),10,16);
     
 def refresh_screen():
     #draw screen
     sc.ctx.screen.use();
-    sc.ctx.clear();
+    #sc.ctx.clear();
     sc.ctx.clear(color=(0,0,0));
     sc.render.draw_screen(sc.texture);
 
