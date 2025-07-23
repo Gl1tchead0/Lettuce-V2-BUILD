@@ -177,7 +177,7 @@ class State:
                             note[3] = 0;
                     else:
                         notePos = abs(notePos);
-                        if inputsP[note[2]] and notePos < 1:
+                        if inputs[note[2]] and notePos < 1:
                             note[3] = 2;
                         if note[3] == 2:
                             if not inputsP[note[2]]:
