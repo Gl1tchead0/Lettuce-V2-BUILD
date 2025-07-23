@@ -146,7 +146,7 @@ class State:
             if self.presDif[i] != inputsP[i]:
                 inputs[i] = inputsP[i];
             
-        self.presDif = inputs;
+        self.presDif = inputsP;
         
         for i in range(0,len(inputsP)):
             if inputsP[i] and self.pressed[i] >= 0:
