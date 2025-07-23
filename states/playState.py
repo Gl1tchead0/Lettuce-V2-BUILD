@@ -23,6 +23,12 @@ class State:
         self.curBeat = 0;
         self.lastStep = 0;
         self.curStep = 0;
+        
+        self.ratingAlpha = 0;
+        self.numbersAlpha = 0;
+        self.comboAlpha = 0;
+        self.rating = "shit";
+        
         self.camGame = glm.vec4(0,0,0,1);
         self.hudZoom = 1;
         self.pressed = [];
@@ -100,6 +106,7 @@ class State:
         self.pressed.append(0);self.pressed.append(0);self.pressed.append(0);self.pressed.append(0);
         
         sprites2load.append(("notes",'assets/images/NOTE_assets'));
+        sprites2load.append(("hud",'assets/images/hudWeas'));
 
         return fondo2load, sprites2load;
 
@@ -133,9 +140,9 @@ class State:
         #controles del jugador
         for i in range(0,len(self.pressed)):
             if self.pressed[i] >= 0:
-                self.pressed[i] = max(self.pressed[i]-sc.deltatime*12,0);
+                self.pressed[i] = max(self.pressed[i]-sc.deltatime*24,0);
             else:
-                self.pressed[i] = min(self.pressed[i]+sc.deltatime*12,0);
+                self.pressed[i] = min(self.pressed[i]+sc.deltatime*24,0);
 
         inputs = [0,0,0,0];
         inputsP = [pg.key.get_pressed()[pg.K_d] or pg.key.get_pressed()[pg.K_LEFT],
@@ -268,26 +275,18 @@ class State:
                             self.score += glm.floor(350*notePos);
                             self.acurasi += 1-notePos;
                             self.acuCoun += 1;
-                            if notePos > 0.8:
-                                print("You Suck!");
-                            elif notePos > 0.6:
-                                print("Shit");
-                            elif notePos > 0.5:
-                                print("Bad");
-                            elif notePos > 0.4:
-                                print("Bruh");
-                            elif notePos > 0.31:
-                                print("Meh");
-                            elif notePos > 0.3:
-                                print("Nice");
-                            elif notePos > 0.2:
-                                print("Good");
-                            elif notePos > 0.1:
-                                print("Great");
-                            elif notePos > 0:
-                                print("Sick!");
-                            else:
-                                print("Perfect!!");
+                            if notePos > 0.6:#Shit
+                                self.ratingAlpha = 1;
+                                self.rating = "shit";
+                            elif notePos > 0.4:#Bad
+                                self.ratingAlpha = 1;
+                                self.rating = "bad";
+                            elif notePos > 0.2:#Good
+                                self.ratingAlpha = 1;
+                                self.rating = "good";
+                            else:#Sick
+                                self.ratingAlpha = 1;
+                                self.rating = "sick";
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[1] == 0:
@@ -320,12 +319,15 @@ class State:
                 self.curEven += 1;
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(0.05*(sc.deltatime*60));
+        self.ratingAlpha = max(self.ratingAlpha-sc.deltatime,0);
         self.stage.update();
             
     def draw(self):
         #fondo mierdas
         sc.render.cam = self.camGame;
+        self.shaind = "sprite";
         self.stage.draw();
+        self.shaind = "sprite";
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
         self.bfF = min(self.bfF+sc.deltatime*24,len(tex.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
@@ -381,3 +383,8 @@ class State:
             if note[2]:
                 notePos = note[0]-self.songPos;
                 sc.render.draw_cam_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+self.stage.modChart(notePos*1000),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+
+        sc.render.shaind = "blend";
+        sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.ratingAlpha));
+        sc.render.draw("hud",self.rating,0,glm.vec2(640,360+self.ratingAlpha*100),glm.vec2(0.5,0.5));
+        sc.render.shaind = "sprite";
