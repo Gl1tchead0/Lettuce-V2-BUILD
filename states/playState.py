@@ -27,6 +27,7 @@ class State:
         self.hudZoom = 1;
         self.pressed = [];
         self.notePoses = []
+        self.presDif = [0,0,0,0];
         for i in range(4):
             self.notePoses.append(glm.vec2(772+130*i,92));
         for i in range(4):
@@ -136,11 +137,17 @@ class State:
             else:
                 self.pressed[i] = min(self.pressed[i]+sc.deltatime*12,0);
 
-        inputs = [p_L,p_D,p_U,p_R];
+        inputs = [0,0,0,0];
         inputsP = [pg.key.get_pressed()[pg.K_d] or pg.key.get_pressed()[pg.K_LEFT],
                    pg.key.get_pressed()[pg.K_f] or pg.key.get_pressed()[pg.K_DOWN],
                    pg.key.get_pressed()[pg.K_j] or pg.key.get_pressed()[pg.K_UP],
                    pg.key.get_pressed()[pg.K_k] or pg.key.get_pressed()[pg.K_RIGHT],];
+        for i in range(0,len(inputsP)):
+            if self.presDif[i] != inputsP[i]:
+                inputs[i] = inputsP[i];
+            
+        self.presDif = inputs;
+        
         for i in range(0,len(inputsP)):
             if inputsP[i] and self.pressed[i] >= 0:
                 self.pressed[i] = 1;

@@ -36,7 +36,7 @@ vcrSpr = None;
 state = None;
 
 song = "TomachiP";
-botplay = True;
+botplay = False;
 
 #pg.event.set_grab(True);
 

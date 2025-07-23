@@ -44,14 +44,6 @@ if __name__ == '__main__':
             if event.type == pg.QUIT:
                 sys.exit();
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_j:p_U = True;
-                if event.key == pg.K_f:p_D = True;
-                if event.key == pg.K_d:p_L = True;
-                if event.key == pg.K_k:p_R = True;
-                if event.key == pg.K_UP:p_U = True;
-                if event.key == pg.K_DOWN:p_D = True;
-                if event.key == pg.K_LEFT:p_L = True;
-                if event.key == pg.K_RIGHT:p_R = True;
                 if event.key == pg.K_RETURN:p_acept = True;
                 if event.key == pg.K_ESCAPE:p_back = True;
             if event.type == pg.VIDEORESIZE:
