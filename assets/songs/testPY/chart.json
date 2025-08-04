@@ -1,7 +1,7 @@
 {
 	"song": {
 		"speed": 2.8,
-		"stage": "stage",
+		"stage": "tomadachiStage",
 		"player1": "draw",
 		"player2": "eder",
 		"events": [],

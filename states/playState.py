@@ -57,7 +57,10 @@ class State:
             bfJs = json.load(file);
         with open('assets/characters/'+chart["song"]["player2"]+".json",'r') as file:
             dadJs = json.load(file);
-        self.events = chart["song"]["events"];
+        if "events" in chart["song"]:
+            self.events = chart["song"]["events"];
+        else:
+            self.events = [];
         self.curEven = 0;
         self.bpm = chart["song"]["bpm"];i = 0;
         for sect in chart["song"]["notes"]:
@@ -67,7 +70,11 @@ class State:
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],1]);
                 if mustHitSection != sect["mustHitSection"]:
-                    self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                    if "sectionBeats" in sect:
+                        self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                                        [["Change look",True,0],["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
+                    else:
+                        self.events.append([((i*4)/self.bpm)*60,
                                         [["Change look",True,0],["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
             else:
                 for note in sect["sectionNotes"]:
@@ -75,7 +82,11 @@ class State:
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,1]);
                 if mustHitSection != sect["mustHitSection"]:
-                    self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                    if "sectionBeats" in sect:
+                        self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
+                                        [["Change look",False,0],["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
+                    else:
+                        self.events.append([((i*4)/self.bpm)*60,
                                         [["Change look",False,0],["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
             mustHitSection = sect["mustHitSection"];
             i += 1;
