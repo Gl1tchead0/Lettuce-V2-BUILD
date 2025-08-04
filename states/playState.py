@@ -110,13 +110,13 @@ class State:
 
         return fondo2load, sprites2load;
 
-    def update(self,p_L,p_R,p_U,p_D,p_acept,p_back):
+    def update(self,keypress):
         self.songPos += sc.deltatime;
         semiSongPos = self.mp.stream_a.tell() / self.mp.stream_a.samplerate;
         if self.songPos < semiSongPos-0.2 or self.songPos > semiSongPos+0.2:
             self.songPos = semiSongPos;
         
-        if p_acept:
+        if keypress == sc.config["keys"]["accept"]:
             self.mp.paused = False;
             self.curEven = 0;
             self.songPos = 0;
@@ -145,10 +145,10 @@ class State:
                 self.pressed[i] = min(self.pressed[i]+sc.deltatime*24,0);
 
         inputs = [0,0,0,0];
-        inputsP = [pg.key.get_pressed()[pg.K_d] or pg.key.get_pressed()[pg.K_LEFT],
-                   pg.key.get_pressed()[pg.K_f] or pg.key.get_pressed()[pg.K_DOWN],
-                   pg.key.get_pressed()[pg.K_j] or pg.key.get_pressed()[pg.K_UP],
-                   pg.key.get_pressed()[pg.K_k] or pg.key.get_pressed()[pg.K_RIGHT],];
+        inputsP = [pg.key.get_pressed()[sc.config["keys"]["leftA"]] or pg.key.get_pressed()[sc.config["keys"]["leftB"]],
+                   pg.key.get_pressed()[sc.config["keys"]["downA"]] or pg.key.get_pressed()[sc.config["keys"]["downB"]],
+                   pg.key.get_pressed()[sc.config["keys"]["upA"]] or pg.key.get_pressed()[sc.config["keys"]["upB"]],
+                   pg.key.get_pressed()[sc.config["keys"]["rightA"]] or pg.key.get_pressed()[sc.config["keys"]["rightB"]],];
         for i in range(0,len(inputsP)):
             if self.presDif[i] != inputsP[i]:
                 inputs[i] = inputsP[i];
@@ -166,7 +166,7 @@ class State:
                 if notePos < -1 and note[3] == 1:
                     note[3] = 0;
                 elif note[2] < 4:
-                    if sc.botplay:
+                    if sc.config["botplay"]:
                         if notePos <= 0:
                             note[3] = 2;
                             self.pressed[note[2]] = -1;
@@ -235,7 +235,7 @@ class State:
         for note in self.chart:
             if note[2]:
                 notePos = (note[0]-self.songPos)*5;
-                if notePos < -1 and not sc.botplay:
+                if notePos < -1 and not sc.config["botplay"]:
                     note[2] = False;
                     self.missS[ran.randint(0,2)].play();
                     self.acurasi += 0;
@@ -252,7 +252,7 @@ class State:
                     elif note[1] == 3:
                         self.bfA = "singRIGHTmiss";
                 elif note[1] < 4:
-                    if sc.botplay:
+                    if sc.config["botplay"]:
                         if notePos < 0:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
@@ -318,7 +318,7 @@ class State:
                     self.stage.onEvent(even[0],even[1],even[2]);
                 self.curEven += 1;
         #zooms del hud
-        self.hudZoom += (1-self.hudZoom)*(0.05*(sc.deltatime*60));
+        self.hudZoom += (1-self.hudZoom)*(2*sc.deltatime);
         self.ratingAlpha = max(self.ratingAlpha-sc.deltatime,0);
         self.stage.update();
             
@@ -342,7 +342,7 @@ class State:
         if self.acuCoun > 0:
             finalAcur = (self.acurasi/self.acuCoun)*100;
         sc.render.draw_cam_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
-        if sc.botplay:
+        if sc.config["botplay"]:
             sc.render.draw_cam_text(None,"(BOTPLAY)",glm.vec2(640,30),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
         notesNames = ["arrowLEFT","arrowDOWN","arrowUP","arrowRIGHT","left press","down press","up press","right press","left confirm","down confirm","up confirm","right confirm"];
         for i in range(len(self.notePoses)):

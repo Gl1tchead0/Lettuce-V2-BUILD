@@ -35,9 +35,37 @@ vcrTex = None;
 vcrSpr = None;
 state = None;
 
+if os.path.exists(os.getenv('APPDATA')+"\\PyFunkin\\config.json"):
+    with open(os.getenv('APPDATA')+"\\PyFunkin\\config.json","r") as json:
+        config = js.load(json);
+else:
+    config = {
+        "keys":{
+            "leftA":pg.K_LEFT,
+            "downA":pg.K_DOWN,
+            "upA":pg.K_UP,
+            "rightA":pg.K_RIGHT,
+            "leftB":pg.K_a,
+            "downB":pg.K_s,
+            "upB":pg.K_w,
+            "rightB":pg.K_d,
+            "accept":pg.K_RETURN,
+            "back":pg.K_ESCAPE
+        },
+        "botplay":False,
+        "downscroll":False
+    };
+
 song = "TomachiP";
-botplay = False;
+botplay = True;
 
 #pg.event.set_grab(True);
 
 #font = pg.font.Font("assets/Moderniz.otf",12);
+
+def save_data():
+    path = os.getenv('APPDATA')+"\\PyFunkin";
+    if not os.path.exists(path):
+        os.makedirs(path);
+    with open(path+"\\config.json","w") as json:
+        json.write(js.dumps(config));

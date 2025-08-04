@@ -29,7 +29,8 @@ def loadState(state):
     ass.load_sprites(sprites2load)
 
 if __name__ == '__main__':
-    loadState("playState");
+    #loadState("playState");
+    loadState("menuState");
     
     image = pg.image.load('assets/images/vcr.png').convert_alpha();
     sc.vcrTex = sc.ctx.texture(size=image.get_size(), components=4, data=pg.image.tostring(image,"RGBA"));
@@ -38,21 +39,29 @@ if __name__ == '__main__':
     del image;
     
     while True:
-        p_L = False;p_R = False;p_U = False;p_D = False;
-        p_acept = False;p_back = False;
+        keypress = None;
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 sys.exit();
             if event.type == pg.KEYDOWN:
-                if event.key == pg.K_RETURN:p_acept = True;
-                if event.key == pg.K_ESCAPE:p_back = True;
+                keypress = event.key;
+                if event.key == sc.config["keys"]["leftA"]:p_L = True;
+                if event.key == sc.config["keys"]["downA"]:p_D = True;
+                if event.key == sc.config["keys"]["upA"]:p_U = True;
+                if event.key == sc.config["keys"]["rightA"]:p_R = True;
+                if event.key == sc.config["keys"]["leftB"]:p_L = True;
+                if event.key == sc.config["keys"]["downB"]:p_D = True;
+                if event.key == sc.config["keys"]["upB"]:p_U = True;
+                if event.key == sc.config["keys"]["rightB"]:p_R = True;
+                if event.key == sc.config["keys"]["accept"]:p_acept = True;
+                if event.key == sc.config["keys"]["back"]:p_back = True;
             if event.type == pg.VIDEORESIZE:
                 width, height = event.size;
                 sc.real_res = event.size;
                 sc.ctx.screen.viewport = (0,0,width,height);
         sc.render.ajust_screen();
         #update
-        sc.state.update(p_L,p_R,p_U,p_D,p_acept,p_back);
+        sc.state.update(keypress);
         #draw
         refresh();
         refresh_screen();

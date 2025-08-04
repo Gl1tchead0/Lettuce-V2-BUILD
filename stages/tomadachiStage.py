@@ -19,28 +19,28 @@ class Stage:
         #weas de la camara
         if self.lookBF:
             if sc.state.bfA == "idle":
-                self.cmo += (glm.vec2(0,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.bfA == "singLEFT":
-                self.cmo += (glm.vec2(-30,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(-30,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.bfA == "singRIGHT":
-                self.cmo += (glm.vec2(30,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(30,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.bfA == "singUP":
-                self.cmo += (glm.vec2(0,-30)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,-30)-self.cmo)*(5*sc.deltatime);
             elif sc.state.bfA == "singDOWN":
-                self.cmo += (glm.vec2(0,30)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,30)-self.cmo)*(5*sc.deltatime);
         else:
             if sc.state.dadA == "idle":
-                self.cmo += (glm.vec2(0,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singLEFT":
-                self.cmo += (glm.vec2(-30,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(-30,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singRIGHT":
-                self.cmo += (glm.vec2(30,0)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(30,0)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singUP":
-                self.cmo += (glm.vec2(0,-30)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,-30)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singDOWN":
-                self.cmo += (glm.vec2(0,30)-self.cmo)*(0.1*(sc.deltatime*60));
+                self.cmo += (glm.vec2(0,30)-self.cmo)*(5*sc.deltatime);
         sc.state.camGame.z = -self.cmo.x*0.001;
-        self.cmf = max(self.cmf-sc.deltatime*5,0)
+        self.cmf = max(self.cmf-sc.deltatime*3,0)
         sc.state.camGame.xy = self.cmp + self.cmr * glm.cos(self.cmf) + self.cmo;
         sc.state.camGame.w = 0.6;
     def draw(self):
