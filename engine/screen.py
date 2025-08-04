@@ -41,14 +41,14 @@ if os.path.exists(os.getenv('APPDATA')+"\\PyFunkin\\config.json"):
 else:
     config = {
         "keys":{
-            "leftA":pg.K_LEFT,
-            "downA":pg.K_DOWN,
-            "upA":pg.K_UP,
-            "rightA":pg.K_RIGHT,
-            "leftB":pg.K_a,
-            "downB":pg.K_s,
-            "upB":pg.K_w,
-            "rightB":pg.K_d,
+            "leftA":pg.K_a,
+            "downA":pg.K_s,
+            "upA":pg.K_w,
+            "rightA":pg.K_d,
+            "leftB":pg.K_LEFT,
+            "downB":pg.K_DOWN,
+            "upB":pg.K_UP,
+            "rightB":pg.K_RIGHT,
             "accept":pg.K_RETURN,
             "back":pg.K_ESCAPE
         },
