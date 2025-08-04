@@ -23,6 +23,7 @@ class State:
         self.curBeat = 0;
         self.lastStep = 0;
         self.curStep = 0;
+        self.live = 50;
         
         self.ratingAlpha = 0;
         self.numbersAlpha = 0;
@@ -32,12 +33,18 @@ class State:
         self.camGame = glm.vec4(0,0,0,1);
         self.hudZoom = 1;
         self.pressed = [];
-        self.notePoses = []
         self.presDif = [0,0,0,0];
-        for i in range(4):
-            self.notePoses.append(glm.vec2(772+130*i,92));
-        for i in range(4):
-            self.notePoses.append(glm.vec2(112+130*i,92));
+        self.notePoses = [];
+        if sc.config["downscroll"]:
+            for i in range(4):
+                self.notePoses.append(glm.vec2(772+130*i,628));
+            for i in range(4):
+                self.notePoses.append(glm.vec2(112+130*i,628));
+        else:
+            for i in range(4):
+                self.notePoses.append(glm.vec2(772+130*i,92));
+            for i in range(4):
+                self.notePoses.append(glm.vec2(112+130*i,92));
         self.noteVector = glm.vec2(0,0);
     def load(self):
         #cargar chart
@@ -367,7 +374,10 @@ class State:
                 model = glm.scale(model,glm.vec3(sc.render.cam.w,sc.render.cam.w,1));
                 model = glm.rotate(model,sc.render.cam.z,glm.vec3(0,0,1))
                 model = glm.translate(model,glm.vec3(position-sc.render.cam.xy-glm.vec2(640,480),0));
-                model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
+                if sc.config["downscroll"]:
+                    model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,-scale.y,1));
+                else:
+                    model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
                 model = glm.translate(model,glm.vec3(-0.5,0,0));
                 sc.render.shaders["longNote"].program["trans"].write(model);
                 if note[3] == 2:

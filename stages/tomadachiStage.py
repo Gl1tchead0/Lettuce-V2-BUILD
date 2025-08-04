@@ -54,4 +54,7 @@ class Stage:
             self.cmr = glm.vec2(val1,val2)-self.cmp;
             self.cmf = 3.1415926535897932384626433832795;
     def modChart(self,notePos):
-        return glm.vec2(0,notePos);
+        if sc.config["downscroll"]:
+            return glm.vec2(0,-notePos);
+        else:
+            return glm.vec2(0,notePos);
