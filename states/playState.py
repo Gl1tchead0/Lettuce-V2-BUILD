@@ -182,6 +182,7 @@ class State:
                         if notePos <= 0:
                             note[3] = 2;
                             self.pressed[note[2]] = -1;
+                            print("alerta 987")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[2]-4 == 0:
@@ -217,6 +218,7 @@ class State:
                                     elif note[2] == 3:
                                         self.bfA = "singRIGHTmiss";
                             self.pressed[note[2]] = -1;
+                            print("alerta 789")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[2] == 0:
@@ -231,6 +233,7 @@ class State:
                     if notePos <= 0:
                         note[3] = 2;
                         self.pressed[note[2]] = -1;
+                        print("alerta 654")
                         self.dadPosing = 0.25;
                         self.dadF = 0;
                         if note[2]-4 == 0:
@@ -268,6 +271,7 @@ class State:
                         if notePos < 0:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
+                            print("alerta 456")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[1] == 0:
@@ -283,6 +287,7 @@ class State:
                         if inputs[note[1]] and notePos < 1:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
+                            print("alerta 321")
                             inputs[note[1]] = False;
                             self.score += glm.floor(350*notePos);
                             self.acurasi += 1-notePos;
@@ -313,6 +318,7 @@ class State:
                     if notePos < 0:
                         note[2] = False;
                         self.pressed[note[1]] = -1;
+                        print("alerta 123")
                         self.dadPosing = 0.25;
                         self.dadF = 0;
                         if note[1]-4 == 0:
