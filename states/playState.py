@@ -155,6 +155,13 @@ class State:
                 self.bfA = "idle";
                 self.bfF = 0;
         self.lastBeat = self.curBeat;
+        
+        #controles del jugador
+        for i in range(0,len(self.pressed)):
+            if self.pressed[i] >= 0:
+                self.pressed[i] = max(self.pressed[i]-sc.deltatime*24,0);
+            else:
+                self.pressed[i] = min(self.pressed[i]+sc.deltatime*24,0);
 
         inputs = [0,0,0,0];
         inputsP = [pg.key.get_pressed()[sc.config["keys"]["leftA"]] or pg.key.get_pressed()[sc.config["keys"]["leftB"]],
@@ -335,12 +342,6 @@ class State:
                 for even in self.events[self.curEven][1]:
                     self.stage.onEvent(even[0],even[1],even[2]);
                 self.curEven += 1;
-        #controles del jugador
-        for i in range(0,len(self.pressed)):
-            if self.pressed[i] >= 0:
-                self.pressed[i] = max(self.pressed[i]-sc.deltatime*24,0);
-            else:
-                self.pressed[i] = min(self.pressed[i]+sc.deltatime*24,0);
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(2*sc.deltatime);
         self.ratingAlpha = max(self.ratingAlpha-sc.deltatime,0);
