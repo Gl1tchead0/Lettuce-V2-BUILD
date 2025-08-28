@@ -25,6 +25,8 @@ class State:
         self.curStep = 0;
         self.live = 50;
         
+        self.speed = 1;
+        
         self.ratingAlpha = 0;
         self.numbersAlpha = 0;
         self.comboAlpha = 0;
@@ -62,7 +64,8 @@ class State:
         else:
             self.events = [];
         self.curEven = 0;
-        self.bpm = chart["song"]["bpm"];i = 0;
+        self.bpm = chart["song"]["bpm"];
+        self.speed = chart["song"]["speed"];i = 0;
         for sect in chart["song"]["notes"]:
             if sect["mustHitSection"]:
                 for note in sect["sectionNotes"]:
@@ -189,7 +192,6 @@ class State:
                         if notePos <= 0:
                             note[3] = 2;
                             self.pressed[note[2]] = -1;
-                            #print("alerta 987")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[2]-4 == 0:
@@ -225,7 +227,6 @@ class State:
                                     elif note[2] == 3:
                                         self.bfA = "singRIGHTmiss";
                             self.pressed[note[2]] = -1;
-                            #print("alerta 789")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[2] == 0:
@@ -278,7 +279,6 @@ class State:
                         if notePos < 0:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
-                            #print("alerta 456")
                             self.bfPosing = 0.25;
                             self.bfF = 0;
                             if note[1] == 0:
@@ -294,7 +294,6 @@ class State:
                         if inputs[note[1]] and notePos < 1:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
-                            #print("alerta 321")
                             inputs[note[1]] = False;
                             self.score += glm.floor(350*notePos);
                             self.acurasi += 1-notePos;
@@ -325,7 +324,6 @@ class State:
                     if notePos < 0:
                         note[2] = False;
                         self.pressed[note[1]] = -1;
-                        print("alerta 123")
                         self.dadPosing = 0.25;
                         self.dadF = 0;
                         if note[1]-4 == 0:
@@ -380,8 +378,8 @@ class State:
         notesNames = ["purple hold piece","blue hold piece","green hold piece","red hold piece","pruple end hold","blue hold end","green hold end","red hold end"];
         for note in self.longChart:
             if note[3]:
-                posy1 = (note[0]-self.songPos)*1000;
-                posy2 = (note[1]-self.songPos)*1000;
+                posy1 = (note[0]-self.songPos)*400*self.speed;
+                posy2 = (note[1]-self.songPos)*400*self.speed;
                 anima1 = notesNames[note[2]%4]
                 anima2 = notesNames[note[2]%4+4]
                 scale = glm.vec2(0.8,posy2-posy1);
@@ -410,7 +408,7 @@ class State:
         for note in self.chart:
             if note[2]:
                 notePos = note[0]-self.songPos;
-                sc.render.draw_cam_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+self.stage.modChart(notePos*1000),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+                sc.render.draw_cam_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+self.stage.modChart(notePos*400*self.speed),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
 
         sc.render.shaind = "blend";
         sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.ratingAlpha));
