@@ -373,7 +373,7 @@ class State:
             if self.pressed[i] == 0:
                 sc.render.draw_cam_offset_scale("notes",notesNames[i%4],0,self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
             elif self.pressed[i] > 0:
-                sc.render.draw_cam_offset_scale("notes",notesNames[i%4+4],int(glm.floor(self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
+                sc.render.draw_cam_offset_scale("notes",notesNames[i%4+4],int(glm.floor(3-self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
             else:
                 sc.render.draw_cam_offset_scale("notes",notesNames[i%4+8],int(glm.floor(3+self.pressed[i]*3)),self.notePoses[i],glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
         notesNames = ["purple hold piece","blue hold piece","green hold piece","red hold piece","pruple end hold","blue hold end","green hold end","red hold end"];
