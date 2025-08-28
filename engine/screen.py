@@ -49,11 +49,16 @@ else:
             "downB":pg.K_DOWN,
             "upB":pg.K_UP,
             "rightB":pg.K_RIGHT,
+            "menu left":pg.K_LEFT,
+            "menu down":pg.K_DOWN,
+            "menu up":pg.K_UP,
+            "menu right":pg.K_RIGHT,
             "accept":pg.K_RETURN,
             "back":pg.K_ESCAPE
         },
         "botplay":False,
-        "downscroll":False
+        "downscroll":False,
+        "volumen":1
     };
 
 song = "TomachiP";

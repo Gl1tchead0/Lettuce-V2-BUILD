@@ -45,16 +45,13 @@ if __name__ == '__main__':
                 sys.exit();
             if event.type == pg.KEYDOWN:
                 keypress = event.key;
-                if event.key == sc.config["keys"]["leftA"]:p_L = True;
-                if event.key == sc.config["keys"]["downA"]:p_D = True;
-                if event.key == sc.config["keys"]["upA"]:p_U = True;
-                if event.key == sc.config["keys"]["rightA"]:p_R = True;
-                if event.key == sc.config["keys"]["leftB"]:p_L = True;
-                if event.key == sc.config["keys"]["downB"]:p_D = True;
-                if event.key == sc.config["keys"]["upB"]:p_U = True;
-                if event.key == sc.config["keys"]["rightB"]:p_R = True;
-                if event.key == sc.config["keys"]["accept"]:p_acept = True;
-                if event.key == sc.config["keys"]["back"]:p_back = True;
+                if event.key == sc.config["keys"]["menu left"]:p_L = True;
+                if event.key == sc.config["keys"]["menu down"]:p_D = True;
+                if event.key == sc.config["keys"]["menu up"]:p_U = True;
+                if event.key == sc.config["keys"]["menu right"]:p_R = True;
+        
+                if event.key == sc.config["keys"]["accept"]:sc.config["volumen"] = max(0,sc.config["volumen"]-0.1);
+                if event.key == sc.config["keys"]["back"]:sc.config["volumen"] = min(1,sc.config["volumen"]+0.1);
             if event.type == pg.VIDEORESIZE:
                 width, height = event.size;
                 sc.real_res = event.size;

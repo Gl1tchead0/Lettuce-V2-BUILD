@@ -31,9 +31,9 @@ class State:
         return fondo2load, sprites2load;
 
     def update(self,keypress):
-        if keypress == sc.config["keys"]["upA"] or keypress == sc.config["keys"]["upB"]:
+        if keypress == sc.config["keys"]["menu up"] or keypress == sc.config["keys"]["menu up"]:
             self.select = (self.select-1)%self.long;
-        if keypress == sc.config["keys"]["downA"] or keypress == sc.config["keys"]["downB"]:
+        if keypress == sc.config["keys"]["menu down"] or keypress == sc.config["keys"]["menu down"]:
             self.select = (self.select+1)%self.long;
             
         if keypress == sc.config["keys"]["back"]:
@@ -69,7 +69,7 @@ class State:
             elif self.menu == 2:#opciones
                 if self.select == 0:
                     self.menu = 3;
-                    self.long = 11;
+                    self.long = 15;
                     self.select = 0;
                 elif self.select == 1:
                     sc.config["botplay"] = not sc.config["botplay"];
@@ -105,6 +105,18 @@ class State:
                 elif self.select == 7:
                     self.menu = 4;
                     self.tecla = "rightB";
+                elif self.select == 4:
+                    self.menu = 4;
+                    self.tecla = "menu left";
+                elif self.select == 5:
+                    self.menu = 4;
+                    self.tecla = "menu down";
+                elif self.select == 6:
+                    self.menu = 4;
+                    self.tecla = "menu up";
+                elif self.select == 7:
+                    self.menu = 4;
+                    self.tecla = "menu right";
                 elif self.select == 8:
                     self.menu = 4;
                     self.tecla = "back";
@@ -119,7 +131,7 @@ class State:
             if keypress != None:
                 sc.config["keys"][self.tecla] = keypress;
                 self.menu = 3;
-                self.long = 11;
+                self.long = 15;
             
     def draw(self):
         if self.menu == 0:#menu
@@ -152,6 +164,10 @@ class State:
                 "B down = "+pg.key.name(sc.config["keys"]["downB"]),
                 "B up = "+pg.key.name(sc.config["keys"]["upB"]),
                 "B right = "+pg.key.name(sc.config["keys"]["rightB"]),
+                "menu left = "+pg.key.name(sc.config["keys"]["menu left"]),
+                "menu down = "+pg.key.name(sc.config["keys"]["menu down"]),
+                "menu up = "+pg.key.name(sc.config["keys"]["menu up"]),
+                "menu right = "+pg.key.name(sc.config["keys"]["menu right"]),
                 "back = "+pg.key.name(sc.config["keys"]["back"]),
                 "accept = "+pg.key.name(sc.config["keys"]["accept"]),
                 "back"
