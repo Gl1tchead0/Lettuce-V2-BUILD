@@ -53,9 +53,9 @@ if __name__ == '__main__':
                 sys.exit();
             if event.type == pg.KEYDOWN:
                 keypress = event.key;
-                if event.key == sc.config["keys"]["menu left"]:p_L = True;
-                if event.key == sc.config["keys"]["menu down"]:p_D = True;
-                if event.key == sc.config["keys"]["menu up"]:p_U = True;
+                if event.key == sc.config["keys"]["menu left"]: p_L = True;
+                if event.key == sc.config["keys"]["menu down"]: p_D = True;
+                if event.key == sc.config["keys"]["menu up"]:   p_U = True;
                 if event.key == sc.config["keys"]["menu right"]:p_R = True;
         
                 if event.key == sc.config["keys"]["vol-"]:

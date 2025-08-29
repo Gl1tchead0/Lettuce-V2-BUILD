@@ -11,7 +11,7 @@ import importlib as il;
 class State:
     def __init__(self):
         self.song = sc.song;
-        self.songPos = 0;
+        self.songPos = -5;
         self.cam = glm.vec2(0,0);
         self.score = 0;
         self.acurasi = 0;
@@ -22,6 +22,8 @@ class State:
         self.lastStep = 0;
         self.curStep = 0;
         self.live = 50;
+        
+        self.intro = glm.vec2(0,0);
         
         self.speed = 1;
         
@@ -46,6 +48,8 @@ class State:
             for i in range(4):
                 self.notePoses.append(glm.vec2(112+130*i,92));
         self.noteVector = glm.vec2(0,0);
+        self.pausa = False;
+        
     def load(self):
         #cargar chart
         self.chart = [];
@@ -68,6 +72,7 @@ class State:
             self.events = [];
         self.curEven = 0;
         self.bpm = chart["song"]["bpm"];
+        self.songPos = -8*60/self.bpm;
         self.speed = chart["song"]["speed"];i = 0;
         for sect in chart["song"]["notes"]:
             if sect["mustHitSection"]:
@@ -130,14 +135,28 @@ class State:
         sounds2load.append(("mis1",'assets/sounds/missnote1.ogg'));
         sounds2load.append(("mis2",'assets/sounds/missnote2.ogg'));
         sounds2load.append(("mis3",'assets/sounds/missnote3.ogg'));
+        
+        sounds2load.append(("int1",'assets/sounds/intro1.ogg'));
+        sounds2load.append(("int2",'assets/sounds/intro2.ogg'));
+        sounds2load.append(("int3",'assets/sounds/intro3.ogg'));
+        sounds2load.append(("intG",'assets/sounds/introGo.ogg'));
 
         return fondo2load, sprites2load,sounds2load;
 
     def update(self,keypress):
+        if self.pausa:
+            self.pause(keypress);
+            return;
+        
         self.songPos += sc.deltatime;
-        semiSongPos = sc.mp.stream_a.tell() / sc.mp.stream_a.samplerate;
-        if self.songPos < semiSongPos-0.2 or self.songPos > semiSongPos+0.2:
-            self.songPos = semiSongPos;
+        semiSongPos = self.songPos;
+        if sc.mp.paused:
+            if self.songPos >= 0:
+                sc.mp.paused = False;
+        else:
+            semiSongPos = sc.mp.stream_a.tell() / sc.mp.stream_a.samplerate;
+            if self.songPos < semiSongPos-0.2 or self.songPos > semiSongPos+0.2:
+                self.songPos = semiSongPos;
             
         missS = ["mis1","mis2","mis3"];
         
@@ -148,7 +167,21 @@ class State:
         #weas del beat
         self.curStep = glm.floor((semiSongPos*self.bpm)*0.01666666666666666666666666666667);
         if self.curStep != self.lastStep:
-            pass;
+            if self.songPos < 0:
+                if self.curStep == -4:
+                    self.intro.x = 0;
+                    self.intro.y = 1;
+                    ass.sounds["int3"].play();
+                if self.curStep == -3:
+                    self.intro.x = 1;
+                    self.intro.y = 1;
+                    ass.sounds["int2"].play();
+                if self.curStep == -2:
+                    self.intro.x = 2;
+                    self.intro.y = 1;
+                    ass.sounds["int1"].play();
+                if self.curStep == -1:
+                    ass.sounds["intG"].play();
         self.lastStep = self.curStep;
 
         self.curBeat = glm.floor(self.curStep*0.25);
@@ -350,7 +383,12 @@ class State:
         #boludeces del volumen
         sc.mp.VOLUME_A = sc.trueVol;
         sc.mp.VOLUME_B = sc.trueVol;
+        
+        self.intro.y = max(self.intro.y-sc.deltatime*6,0);
         self.stage.update();
+        
+    def pause(self,keypress):
+        pass;
             
     def draw(self):
         #fondo mierdas
@@ -420,4 +458,8 @@ class State:
         sc.render.shaind = "blend";
         sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.ratingAlpha));
         sc.render.draw("hud",self.rating,0,glm.vec2(640,360+self.ratingAlpha*100),glm.vec2(0.5,0.5));
+        #3,2,1,go   self.intro
+        sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.intro.y));
+        sc.render.draw_scale("hud","intro",int(glm.floor(self.intro.x)),glm.vec2(640,360),glm.vec2(0.5+self.intro.y,0.5+self.intro.y),glm.vec2(0.5,0.5));
         sc.render.shaind = "sprite";
+        
