@@ -5,8 +5,7 @@ import random as ran;
 from engine import screen as sc;
 from engine import sprites as spr;
 from engine import assets as ass;
-from engine import assets as tex;
-from engine import musicPlayer as mp;
+from engine import musicPlayer as mup;
 import importlib as il;
 
 class State:
@@ -14,7 +13,6 @@ class State:
         self.song = sc.song;
         self.songPos = 0;
         self.cam = glm.vec2(0,0);
-        self.mp = mp.musicPlayer(sc.song);
         self.score = 0;
         self.acurasi = 0;
         self.acuCoun = 0;
@@ -53,6 +51,11 @@ class State:
         self.chart = [];
         self.longChart = [];
         mustHitSection = False;
+        
+        sc.mp.change_audio_a('assets/songs/'+sc.song+"/inst.ogg");
+        sc.mp.change_audio_b('assets/songs/'+sc.song+"/voices.ogg");
+        sc.mp.paused = True;
+        
         with open('assets/songs/'+sc.song+"/chart.json",'r') as file:
             chart = json.load(file);
         with open('assets/characters/'+chart["song"]["player1"]+".json",'r') as file:
@@ -95,13 +98,8 @@ class State:
             i += 1;
         sorted(self.events,key=lambda x: x[0], reverse=True);
         self.stage = il.import_module("stages."+chart["song"]["stage"]).Stage();
-
-        self.missS = []
-        self.missS.append(pg.mixer.Sound("assets/sounds/missnote1.ogg"));
-        self.missS.append(pg.mixer.Sound("assets/sounds/missnote2.ogg"));
-        self.missS.append(pg.mixer.Sound("assets/sounds/missnote3.ogg"));
         #cargar los assets
-        fondo2load,sprites2load = self.stage.load();
+        fondo2load,sprites2load,sounds2load = self.stage.load();
 
         self.bfP = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         self.bfS = bfJs["scale"];
@@ -128,17 +126,23 @@ class State:
         
         sprites2load.append(("notes",'assets/images/NOTE_assets'));
         sprites2load.append(("hud",'assets/images/hudWeas'));
+        
+        sounds2load.append(("mis1",'assets/sounds/missnote1.ogg'));
+        sounds2load.append(("mis2",'assets/sounds/missnote2.ogg'));
+        sounds2load.append(("mis3",'assets/sounds/missnote3.ogg'));
 
-        return fondo2load, sprites2load;
+        return fondo2load, sprites2load,sounds2load;
 
     def update(self,keypress):
         self.songPos += sc.deltatime;
-        semiSongPos = self.mp.stream_a.tell() / self.mp.stream_a.samplerate;
+        semiSongPos = sc.mp.stream_a.tell() / sc.mp.stream_a.samplerate;
         if self.songPos < semiSongPos-0.2 or self.songPos > semiSongPos+0.2:
             self.songPos = semiSongPos;
+            
+        missS = ["mis1","mis2","mis3"];
         
         if keypress == sc.config["keys"]["accept"]:
-            self.mp.paused = False;
+            sc.mp.paused = False;
             self.curEven = 0;
             self.songPos = 0;
         #weas del beat
@@ -212,7 +216,7 @@ class State:
                             if not inputsP[note[2]]:
                                 note[3] = 0;
                                 if (note[1]-self.songPos-0.2)*5 > 0:
-                                    self.missS[ran.randint(0,2)].play();
+                                    ass.sounds[missS[ran.randint(0,2)]].play();
                                     self.acurasi += 0;
                                     self.acuCoun += 1;
                                     self.misses += 1;
@@ -241,7 +245,6 @@ class State:
                     if notePos <= 0:
                         note[3] = 2;
                         self.pressed[note[2]] = -1;
-                        print("alerta 654")
                         self.dadPosing = 0.25;
                         self.dadF = 0;
                         if note[2]-4 == 0:
@@ -260,7 +263,7 @@ class State:
                 notePos = (note[0]-self.songPos)*5;
                 if notePos < -1 and not sc.config["botplay"]:
                     note[2] = False;
-                    self.missS[ran.randint(0,2)].play();
+                    ass.sounds[missS[ran.randint(0,2)]].play();
                     self.acurasi += 0;
                     self.acuCoun += 1;
                     self.misses += 1;
@@ -343,6 +346,10 @@ class State:
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(2*sc.deltatime);
         self.ratingAlpha = max(self.ratingAlpha-sc.deltatime,0);
+        
+        #boludeces del volumen
+        sc.mp.VOLUME_A = sc.trueVol;
+        sc.mp.VOLUME_B = sc.trueVol;
         self.stage.update();
             
     def draw(self):
@@ -353,11 +360,11 @@ class State:
         self.shaind = "sprite";
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
-        self.bfF = min(self.bfF+sc.deltatime*24,len(tex.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
+        self.bfF = min(self.bfF+sc.deltatime*24,len(ass.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);
         sc.render.draw_cam_scale("bf",self.bfD[self.bfA][0],int(glm.floor(self.bfF)),self.bfP,glm.vec2(self.bfS),suboffset=self.bfD[self.bfA][1])
 
         self.dadPosing = max(self.dadPosing-sc.deltatime,0);
-        self.dadF = min(self.dadF+sc.deltatime*24,len(tex.sprites["dad"].anims[self.dadD[self.dadA][0]])-1);
+        self.dadF = min(self.dadF+sc.deltatime*24,len(ass.sprites["dad"].anims[self.dadD[self.dadA][0]])-1);
         sc.render.draw_cam_scale("dad",self.dadD[self.dadA][0],int(glm.floor(self.dadF)),self.dadP,glm.vec2(self.dadS),suboffset=self.dadD[self.dadA][1])
         #hud mierdas
         sc.render.cam = glm.vec4(0,0,0,self.hudZoom);
@@ -384,25 +391,25 @@ class State:
                 anima2 = notesNames[note[2]%4+4]
                 scale = glm.vec2(0.8,posy2-posy1);
                 position = self.notePoses[note[2]]+self.stage.modChart(posy1);
-                tex.textures["notes"].use(0);
+                ass.textures["notes"].use(0);
         
                 model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
                 model = glm.scale(model,glm.vec3(sc.render.cam.w,sc.render.cam.w,1));
                 model = glm.rotate(model,sc.render.cam.z,glm.vec3(0,0,1))
                 model = glm.translate(model,glm.vec3(position-sc.render.cam.xy-glm.vec2(640,480),0));
                 if sc.config["downscroll"]:
-                    model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,-scale.y,1));
+                    model = glm.scale(model,glm.vec3(glm.abs(ass.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,-scale.y,1));
                 else:
-                    model = glm.scale(model,glm.vec3(glm.abs(tex.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
+                    model = glm.scale(model,glm.vec3(glm.abs(ass.sprites["notes"].anims[anima1][0].rwh.x)*scale.x,scale.y,1));
                 model = glm.translate(model,glm.vec3(-0.5,0,0));
                 sc.render.shaders["longNote"].program["trans"].write(model);
                 if note[3] == 2:
                     sc.render.shaders["longNote"].program["cut"].write(glm.float32(min(1,max(-posy1/(posy2-posy1),0))));
                 else:
                     sc.render.shaders["longNote"].program["cut"].write(glm.float32(0));
-                sc.render.shaders["longNote"].program["rep"].write(glm.float32(scale.y/(tex.sprites["notes"].anims[anima1][0].rwh.y*scale.x)));
-                sc.render.shaders["longNote"].program["img1"].write(glm.vec4(tex.sprites["notes"].anims[anima1][0].xy,tex.sprites["notes"].anims[anima1][0].wh));
-                sc.render.shaders["longNote"].program["img2"].write(glm.vec4(tex.sprites["notes"].anims[anima2][0].xy,tex.sprites["notes"].anims[anima2][0].wh));
+                sc.render.shaders["longNote"].program["rep"].write(glm.float32(scale.y/(ass.sprites["notes"].anims[anima1][0].rwh.y*scale.x)));
+                sc.render.shaders["longNote"].program["img1"].write(glm.vec4(ass.sprites["notes"].anims[anima1][0].xy,ass.sprites["notes"].anims[anima1][0].wh));
+                sc.render.shaders["longNote"].program["img2"].write(glm.vec4(ass.sprites["notes"].anims[anima2][0].xy,ass.sprites["notes"].anims[anima2][0].wh));
                 sc.render.shaders["longNote"].render();
         notesNames = ["purple","blue","green","red","purple","blue","green","red"];
         for note in self.chart:

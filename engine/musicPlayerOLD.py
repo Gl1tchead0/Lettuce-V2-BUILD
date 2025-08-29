@@ -30,21 +30,22 @@ class StreamedAudio:
             return data
 
 class musicPlayer:
-    def __init__(self, audio1,vol, audio2=None):
+    def __init__(self,audio1,audio2=None):
         self.BLOCKSIZE = 1024
-        self.VOLUME_A = vol;
-        self.VOLUME_B = vol;
-        self.paused = False
+        self.VOLUME_A = 1.0
+        self.VOLUME_B = 1.0
 
-        self.stream_a = StreamedAudio(audio1)
-        if audio2 is not None:
-            self.stream_b = StreamedAudio(audio2)
+        self.paused = False
+        
+        self.stream_a = StreamedAudio(audio1);
+        if audio2 != None:
+            self.stream_b = StreamedAudio(audio2);
         else:
-            self.stream_b = StreamedAudio(audio1)
+            self.stream_b = StreamedAudio(audio1);
 
         assert self.stream_a.samplerate == self.stream_b.samplerate
         assert self.stream_a.channels == self.stream_b.channels
-
+        
         self.stream = sd.OutputStream(
             samplerate=self.stream_a.samplerate,
             channels=self.stream_a.channels,
@@ -53,25 +54,11 @@ class musicPlayer:
         )
         self.stream.start()
 
-    def audio_callback(self, outdata, frames, time, status):
+    def audio_callback(self,outdata, frames, time, status):
         if self.paused:
             outdata[:] = np.zeros((frames, self.stream_a.channels), dtype='float32')
         else:
             block_a = self.stream_a.read_block(frames)
             block_b = self.stream_b.read_block(frames)
             mixed = self.VOLUME_A * block_a + self.VOLUME_B * block_b
-            outdata[:] = mixed
-
-    def change_audio_a(self, filename):
-        new_stream = StreamedAudio(filename)
-        # Aseguramos que coincida con el formato del otro
-        assert new_stream.samplerate == self.stream_b.samplerate
-        assert new_stream.channels == self.stream_b.channels
-        self.stream_a = new_stream
-
-    def change_audio_b(self, filename):
-        new_stream = StreamedAudio(filename)
-        # Aseguramos que coincida con el formato del otro
-        assert new_stream.samplerate == self.stream_a.samplerate
-        assert new_stream.channels == self.stream_a.channels
-        self.stream_b = new_stream
+            outdata[:] = mixed;

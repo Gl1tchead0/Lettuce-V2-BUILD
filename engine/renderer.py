@@ -14,6 +14,13 @@ class Renderer:
         vertex_data = self.get_data(vertices=vertexs,indices=indices);
         simvbo = sc.ctx.buffer(vertex_data);
         vbo = sc.ctx.buffer(np.hstack([vertex_data,vertex_data]));
+        
+        vertexs = [(0,0),(1,0),(1,1)];
+        colors = [(1,1,1),(1,1,1),(1,1,1)];
+        indices = [(0,1,2)];
+        vertex_data = self.get_data(vertices=vertexs,indices=indices);
+        color_data = self.get_data(vertices=colors,indices=indices);
+        self.polyvbo = sc.ctx.buffer(np.hstack([vertex_data,color_data]));
 
         self.cam = glm.vec4(0,0,0,1);
         
@@ -27,7 +34,7 @@ class Renderer:
                 vert = open(f'assets/shaders/{dir}.vert').read()
                 frag = open(f'assets/shaders/{dir}.frag').read()
                 program = sc.ctx.program(vertex_shader=vert, fragment_shader=frag);
-                if dir != "solidcol":
+                if dir != "solidcol" and dir != "polygon":
                     program['u_texture_0'] = 0;
                 if dir != "screen":
                     program["proj"].write(sc.proj);
@@ -40,6 +47,8 @@ class Renderer:
             
             if dir == "solidcol":
                 self.shaders[dir] = sc.ctx.vertex_array(program,[(simvbo, '2f', 'in_position')]);
+            elif dir == "polygon":
+                self.shaders[dir] = sc.ctx.vertex_array(program,[(self.polyvbo, '2f 3f', 'in_position', 'in_color')]);
             else:
                 self.shaders[dir] = sc.ctx.vertex_array(program,[(vbo, '2f 2f', 'in_textcoord_0', 'in_position')]);
     
@@ -263,3 +272,25 @@ class Renderer:
         self.shaders["solidcol"].program["col"].write(color);
         
         self.shaders["solidcol"].render();
+        
+    def draw_simple_poly(self, points,color):#shrek XD
+        vertexs = points;
+        colors = [color,color,color];
+        indices = [(0,1,2)];
+        vertex_data = self.get_data(vertices=vertexs,indices=indices);
+        color_data = self.get_data(vertices=colors,indices=indices);
+        self.polyvbo.write(np.hstack([vertex_data,color_data]).tobytes());
+        model = glm.translate(glm.mat4(),glm.vec3(0,0,0));
+        self.shaders["polygon"].program["trans"].write(model);
+        self.shaders["polygon"].render();
+        
+    def draw_poly(self, points,colors):#shrek XD
+        vertexs = points;
+        colors = colors;
+        indices = [(0,1,2)];
+        vertex_data = self.get_data(vertices=vertexs,indices=indices);
+        color_data = self.get_data(vertices=colors,indices=indices);
+        self.polyvbo.write(np.hstack([vertex_data,color_data]).tobytes());
+        model = glm.translate(glm.mat4(),glm.vec3(0,0,0));
+        self.shaders["polygon"].program["trans"].write(model);
+        self.shaders["polygon"].render();

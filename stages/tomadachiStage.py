@@ -11,10 +11,11 @@ class Stage:
     def load(self):
         fondo2load = [];
         sprites2load = [];
+        sounds2load = [];
         fondo2load.append(("piso" ,'assets/images/tomachiFondo/pisoPisoRap.png'));
         fondo2load.append(("arbustos" ,'assets/images/tomachiFondo/pisoRap.png'));
         fondo2load.append(("fuente" ,'assets/images/tomachiFondo/fuente_y_cartel.png'));
-        return fondo2load,sprites2load;
+        return fondo2load,sprites2load,sounds2load;
     def update(self):
         #weas de la camara
         if self.lookBF:

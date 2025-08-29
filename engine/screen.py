@@ -4,6 +4,7 @@ import glm;
 import json as js;
 import os;
 from engine import renderer as ren;
+from engine import musicPlayer as mup;
 
 pg.init();
 
@@ -53,6 +54,8 @@ else:
             "menu down":pg.K_DOWN,
             "menu up":pg.K_UP,
             "menu right":pg.K_RIGHT,
+            "vol-":pg.K_MINUS,
+            "vol+":pg.K_PLUS,
             "accept":pg.K_RETURN,
             "back":pg.K_ESCAPE
         },
@@ -63,6 +66,8 @@ else:
 
 song = "TomachiP";
 botplay = True;
+trueVol = config["volumen"]*config["volumen"];
+mp = mup.musicPlayer("assets/songs/menu.ogg",trueVol);
 
 #pg.event.set_grab(True);
 

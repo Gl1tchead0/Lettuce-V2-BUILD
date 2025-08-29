@@ -25,10 +25,13 @@ class State:
         #cargar los assets
         fondo2load = [];
         sprites2load = [];
+        sounds2load = [];
+        
+        sc.mp.change_audio_a("assets/songs/menu.ogg");
         
         fondo2load.append(("logo",'assets/images/PyFunk.png'));
 
-        return fondo2load, sprites2load;
+        return fondo2load, sprites2load, sounds2load;
 
     def update(self,keypress):
         if keypress == sc.config["keys"]["menu up"] or keypress == sc.config["keys"]["menu up"]:
@@ -69,7 +72,7 @@ class State:
             elif self.menu == 2:#opciones
                 if self.select == 0:
                     self.menu = 3;
-                    self.long = 15;
+                    self.long = 17;
                     self.select = 0;
                 elif self.select == 1:
                     sc.config["botplay"] = not sc.config["botplay"];
@@ -105,25 +108,31 @@ class State:
                 elif self.select == 7:
                     self.menu = 4;
                     self.tecla = "rightB";
-                elif self.select == 4:
-                    self.menu = 4;
-                    self.tecla = "menu left";
-                elif self.select == 5:
-                    self.menu = 4;
-                    self.tecla = "menu down";
-                elif self.select == 6:
-                    self.menu = 4;
-                    self.tecla = "menu up";
-                elif self.select == 7:
-                    self.menu = 4;
-                    self.tecla = "menu right";
                 elif self.select == 8:
                     self.menu = 4;
-                    self.tecla = "back";
+                    self.tecla = "menu left";
                 elif self.select == 9:
                     self.menu = 4;
-                    self.tecla = "accept";
+                    self.tecla = "menu down";
                 elif self.select == 10:
+                    self.menu = 4;
+                    self.tecla = "menu up";
+                elif self.select == 11:
+                    self.menu = 4;
+                    self.tecla = "menu right";
+                elif self.select == 12:
+                    self.menu = 4;
+                    self.tecla = "vol-";
+                elif self.select == 13:
+                    self.menu = 4;
+                    self.tecla = "vol+";
+                elif self.select == 14:
+                    self.menu = 4;
+                    self.tecla = "back";
+                elif self.select == 15:
+                    self.menu = 4;
+                    self.tecla = "accept";
+                elif self.select == 16:
                     self.menu = 2;
                     self.long = 4;
                     self.select = 0;
@@ -131,7 +140,9 @@ class State:
             if keypress != None:
                 sc.config["keys"][self.tecla] = keypress;
                 self.menu = 3;
-                self.long = 15;
+                self.long = 17;
+        sc.mp.VOLUME_A = sc.trueVol;
+        sc.mp.VOLUME_B = 0;
             
     def draw(self):
         if self.menu == 0:#menu
@@ -168,6 +179,8 @@ class State:
                 "menu down = "+pg.key.name(sc.config["keys"]["menu down"]),
                 "menu up = "+pg.key.name(sc.config["keys"]["menu up"]),
                 "menu right = "+pg.key.name(sc.config["keys"]["menu right"]),
+                "volume minus = "+pg.key.name(sc.config["keys"]["vol-"]),
+                "volume plus = "+pg.key.name(sc.config["keys"]["vol+"]),
                 "back = "+pg.key.name(sc.config["keys"]["back"]),
                 "accept = "+pg.key.name(sc.config["keys"]["accept"]),
                 "back"

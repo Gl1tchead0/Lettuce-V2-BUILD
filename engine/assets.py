@@ -5,7 +5,7 @@ from engine import screen as sc;
 
 textures = {};
 sprites = {};
-sounds = {};
+sounds = {"beep":pg.mixer.Sound('assets/sounds/beep.ogg')};
 
 def load_backgrounds(files):
     #files = glob.glob('assets/backgrounds/*.png');
@@ -29,3 +29,7 @@ def load_sounds(files):
     for file in files:
         sounds[file[0]] = pg.mixer.Sound(file[1]);
         print("el sonido: "+file[0]+"; se cargo correctamente we.");
+        
+def update_sounds_vol():
+    for sound in sounds.values():
+        sound.set_volume(sc.trueVol);
