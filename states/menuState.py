@@ -69,6 +69,7 @@ class State:
                 else:
                     sc.song = self.songs[self.select];
                     main.loadState("playState");
+                    return True;
             elif self.menu == 2:#opciones
                 if self.select == 0:
                     self.menu = 3;
@@ -145,6 +146,9 @@ class State:
         sc.mp.VOLUME_B = 0;
             
     def draw(self):
+        pass;
+
+    def drawHUD(self):
         if self.menu == 0:#menu
             menu_text = "Menu:";
             opciones = [
@@ -189,15 +193,15 @@ class State:
         sc.render.s_rect(glm.vec2(0),glm.vec2(1280,720),glm.vec4(0,0,0,0.5));
         
         if self.menu == 4:
-            sc.render.draw_cam_text(None,"(Press the key you want to set)",glm.vec2(64,352),glm.vec3(0.7,0.7,0.7),10,16,aling="left");
+            sc.render.draw_text(None,"(Press the key you want to set)",glm.vec2(64,352),glm.vec3(0.7,0.7,0.7),10,16,aling="left");
         else:
             for i in range(len(opciones)):
                 pos = 352+16*(i-self.select);
                 tono = max(0,min(1-abs((pos-352)*0.01),1));
                 if i == self.select:
-                    sc.render.draw_cam_text(None,opciones[i],glm.vec2(75,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
+                    sc.render.draw_text(None,opciones[i],glm.vec2(75,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
                 else:
-                    sc.render.draw_cam_text(None,opciones[i],glm.vec2(64,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
-            sc.render.draw_cam_text(None,menu_text,glm.vec2(64,232),glm.vec3(0.7,0.7,0.7),10,16,aling="left");
+                    sc.render.draw_text(None,opciones[i],glm.vec2(64,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
+            sc.render.draw_text(None,menu_text,glm.vec2(64,232),glm.vec3(0.7,0.7,0.7),10,16,aling="left");
         
         sc.render.draw_background("logo",glm.vec2(700,32));

@@ -1,9 +1,10 @@
 import glm;
+import pygame as pg;
 from engine import screen as sc;
 
 class Stage:
     def __init__(self):
-        self.cmp = glm.vec2(0);
+        self.cmp = glm.vec2(640,360);
         self.cmr = glm.vec2(0);
         self.cmf = 0;
         self.lookBF = True;
@@ -40,18 +41,19 @@ class Stage:
                 self.cmo += (glm.vec2(0,-30)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singDOWN":
                 self.cmo += (glm.vec2(0,30)-self.cmo)*(5*sc.deltatime);
-        sc.state.camGame.z = -self.cmo.x*0.001;
+        sc.render.camR.z = -self.cmo.x*0.001;
         self.cmf = max(self.cmf-sc.deltatime*3,0)
-        sc.state.camGame.xy = self.cmp + self.cmr * glm.cos(self.cmf) + self.cmo;
-        sc.state.camGame.w = 0.6;
+        sc.render.camP.xy = self.cmp + self.cmr * glm.cos(self.cmf) + self.cmo;
+        sc.render.camP.z = -360*1.4;
+        #sc.render.camP.w = 0.6;
     def draw(self):
-        sc.render.s_rect(glm.vec2(0),glm.vec2(1280,720),glm.vec4(1,1,1,1));
-        sc.render.draw_cam_background("piso",glm.vec2(-600,500));
+        sc.ctx.clear(color=(1,1,1));
+        sc.render.draw_background("piso",glm.vec2(-600,500));
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;
         if type == "Camera look at pos":
-            self.cmp = (glm.vec2(val1,val2)+sc.state.camGame.xy)*0.5;
+            self.cmp = (glm.vec2(val1,val2)+sc.render.camP.xy)*0.5;
             self.cmr = glm.vec2(val1,val2)-self.cmp;
             self.cmf = 3.1415926535897932384626433832795;
     def modChart(self,notePos):

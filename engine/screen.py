@@ -24,11 +24,16 @@ deltatime = 0;
 ctx.enable(mgl.BLEND);
 ctx.blend_func = (mgl.SRC_ALPHA, mgl.ONE_MINUS_SRC_ALPHA);
 
-texture = ctx.texture((1280,720), 3);
+texture = ctx.texture((1280,720), 4);
 texture.filter = (mgl.LINEAR, mgl.LINEAR);
 #drb = ctx.depth_renderbuffer((960,540));
 screen_fbo = ctx.framebuffer(color_attachments=[texture]);
 proj = glm.ortho(0.0, 1280.0, 720.0, 0.0, -1000.0, 1000.0);
+
+texture3d = ctx.texture((1280,720), 3);
+texture3d.filter = (mgl.LINEAR, mgl.LINEAR);
+#drb = ctx.depth_renderbuffer((960,540));
+screen3d_fbo = ctx.framebuffer(color_attachments=[texture3d]);
 
 render = ren.Renderer();
 

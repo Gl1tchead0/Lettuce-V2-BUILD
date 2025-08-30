@@ -15,14 +15,17 @@ class Renderer:
         simvbo = sc.ctx.buffer(vertex_data);
         vbo = sc.ctx.buffer(np.hstack([vertex_data,vertex_data]));
         
-        vertexs = [(0,0),(1,0),(1,1)];
+        vertexs = [(0,0,0),(1,0,0),(1,1,0)];
         colors = [(1,1,1),(1,1,1),(1,1,1)];
         indices = [(0,1,2)];
         vertex_data = self.get_data(vertices=vertexs,indices=indices);
         color_data = self.get_data(vertices=colors,indices=indices);
         self.polyvbo = sc.ctx.buffer(np.hstack([vertex_data,color_data]));
 
-        self.cam = glm.vec4(0,0,0,1);
+        #self.cam = glm.vec4(0,0,0,1);
+        self.camP = glm.vec3(0,0,-360);
+        self.camR = glm.vec3(0,0,0);
+        self.camT = glm.lookAt(self.camP,glm.vec3(0,0,0),glm.vec3(0,1,0));
         
         self.shaders = {};
         self.shaind = "sprite";
@@ -36,19 +39,17 @@ class Renderer:
                 program = sc.ctx.program(vertex_shader=vert, fragment_shader=frag);
                 if dir != "solidcol" and dir != "polygon":
                     program['u_texture_0'] = 0;
-                if dir != "screen":
-                    program["proj"].write(sc.proj);
             else:
                 vert = open(f'assets/shaders/sprite.vert').read()
                 frag = open(f'assets/shaders/{dir}.frag').read()
                 program = sc.ctx.program(vertex_shader=vert, fragment_shader=frag);
                 program['u_texture_0'] = 0;
-                program["proj"].write(sc.proj);
+                program["cam"].write(self.camT);
             
             if dir == "solidcol":
                 self.shaders[dir] = sc.ctx.vertex_array(program,[(simvbo, '2f', 'in_position')]);
             elif dir == "polygon":
-                self.shaders[dir] = sc.ctx.vertex_array(program,[(self.polyvbo, '2f 3f', 'in_position', 'in_color')]);
+                self.shaders[dir] = sc.ctx.vertex_array(program,[(self.polyvbo, '3f 3f', 'in_position', 'in_color')]);
             else:
                 self.shaders[dir] = sc.ctx.vertex_array(program,[(vbo, '2f 2f', 'in_textcoord_0', 'in_position')]);
     
@@ -96,7 +97,9 @@ class Renderer:
                     pos = glm.vec2(position.x+i*sep,position.y);
                     model = glm.translate(glm.mat4(),glm.vec3(pos-sc.vcrSpr.anims[anima][0].offset,0));
                     model = glm.scale(model,glm.vec3(scale,scale,1));
+                    self.shaders["font"].program["proj"].write(sc.proj);
                     self.shaders["font"].program["trans"].write(model);
+                    self.shaders["font"].program["cam"].write(self.camT);
                     self.shaders["font"].program["color"].write(color);
                     self.shaders["font"].program["pos"].write(sc.vcrSpr.anims[anima][0].xy);
                     self.shaders["font"].program["size"].write(sc.vcrSpr.anims[anima][0].wh);
@@ -110,48 +113,9 @@ class Renderer:
                     pos = glm.vec2(position.x+i*sep,position.y);
                     model = glm.translate(glm.mat4(),glm.vec3(pos-font.anims[anima][0].offset,0));
                     model = glm.scale(model,glm.vec3(glm.abs(font.anims[anima][0].rwh.x)*scale,glm.abs(font.anims[anima][0].rwh.y)*scale,1));
+                    self.shaders["font"].program["proj"].write(sc.proj);
                     self.shaders["font"].program["trans"].write(model);
-                    self.shaders["font"].program["color"].write(color);
-                    self.shaders["font"].program["pos"].write(font.anims[anima][0].xy);
-                    self.shaders["font"].program["size"].write(font.anims[anima][0].wh);
-                    self.shaders["font"].render();
-            
-    def draw_cam_text(self, font, text, position, color, sep,scale=32,aling="left"):
-        if aling == "center":
-            position.x -= (len(text)*sep-sep+scale)*0.5;
-        if aling == "right":
-            position.x -= len(text)*sep-sep+scale;
-            
-        if font == None:
-            sc.vcrTex.use(0);
-            texto = list(text);
-            for i in range(len(texto)):
-                anima = texto[i];
-                if anima != " ":
-                    pos = glm.vec2(position.x+i*sep,position.y);
-                    model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
-                    model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
-                    model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1));
-                    model = glm.translate(model,glm.vec3(pos-sc.vcrSpr.anims[anima][0].offset-glm.vec2(640,480),0));
-                    model = glm.scale(model,glm.vec3(scale,scale,1));
-                    self.shaders["font"].program["trans"].write(model);
-                    self.shaders["font"].program["color"].write(color);
-                    self.shaders["font"].program["pos"].write(sc.vcrSpr.anims[anima][0].xy);
-                    self.shaders["font"].program["size"].write(sc.vcrSpr.anims[anima][0].wh);
-                    self.shaders["font"].render();
-        else:
-            tex.textures[font.tex].use(0);
-            texto = list(text);
-            for i in range(len(texto)):
-                anima = texto[i];
-                if anima != " ":
-                    pos = glm.vec2(position.x+i*sep,position.y);
-                    model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
-                    model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
-                    model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1));
-                    model = glm.translate(model,glm.vec3(pos-font.anims[anima][0].offset-glm.vec2(640,480),0));
-                    model = glm.scale(model,glm.vec3(glm.abs(font.anims[anima][0].rwh.x)*scale,glm.abs(font.anims[anima][0].rwh.y)*scale,1));
-                    self.shaders["font"].program["trans"].write(model);
+                    self.shaders["font"].program["cam"].write(self.camT);
                     self.shaders["font"].program["color"].write(color);
                     self.shaders["font"].program["pos"].write(font.anims[anima][0].xy);
                     self.shaders["font"].program["size"].write(font.anims[anima][0].wh);
@@ -162,21 +126,9 @@ class Renderer:
         
         model = glm.translate(glm.mat4(),glm.vec3(position,0));
         model = glm.scale(model,glm.vec3(tex.textures[fondo].size[0],tex.textures[fondo].size[1],1));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
-        self.shaders[self.shaind].program["pos"].write(glm.vec2(0,0));
-        self.shaders[self.shaind].program["size"].write(glm.vec2(1,1));
-        
-        self.shaders[self.shaind].render();
-        
-    def draw_cam_background(self, fondo,position):
-        tex.textures[fondo].use(0);
-        
-        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
-        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
-        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
-        model = glm.translate(model,glm.vec3(position-self.cam.xy-glm.vec2(640,480),0));
-        model = glm.scale(model,glm.vec3(tex.textures[fondo].size[0],tex.textures[fondo].size[1],1));
-        self.shaders[self.shaind].program["trans"].write(model);
+        self.shaders[self.shaind].program["cam"].write(self.camT);
         self.shaders[self.shaind].program["pos"].write(glm.vec2(0,0));
         self.shaders[self.shaind].program["size"].write(glm.vec2(1,1));
         
@@ -188,8 +140,9 @@ class Renderer:
         model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset-suboffset,0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x),glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y),1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
-        
+        self.shaders[self.shaind].program["cam"].write(self.camT);
         self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
@@ -200,23 +153,9 @@ class Renderer:
         model = glm.translate(glm.mat4(),glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset,0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
-        
-        self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
-        self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
-        self.shaders[self.shaind].render();
-    
-    def draw_cam_scale(self, sprite, anima,index, position, scale, offset=glm.vec2(0,0),suboffset=glm.vec2(0,0)):
-        tex.textures[sprite].use(0);
-        
-        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
-        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
-        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
-        model = glm.translate(model,glm.vec3(position-tex.sprites[sprite].anims[anima][index].offset*scale-suboffset-self.cam.xy-glm.vec2(640,480),0));
-        model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
-        model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
-        self.shaders[self.shaind].program["trans"].write(model);
-        
+        self.shaders[self.shaind].program["cam"].write(self.camT);
         self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
@@ -227,23 +166,9 @@ class Renderer:
         model = glm.translate(glm.mat4(),glm.vec3(position,0));
         model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
-        
-        self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
-        self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
-        self.shaders[self.shaind].render();
-    
-    def draw_cam_offset_scale(self, sprite, anima,index, position, scale, offset):
-        tex.textures[sprite].use(0);
-        
-        model = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
-        model = glm.scale(model,glm.vec3(self.cam.w,self.cam.w,1));
-        model = glm.rotate(model,self.cam.z,glm.vec3(0,0,1))
-        model = glm.translate(model,glm.vec3(position,0)-glm.vec3(640,480,0));
-        model = glm.scale(model,glm.vec3(glm.abs(tex.sprites[sprite].anims[anima][index].rwh.x)*scale.x,glm.abs(tex.sprites[sprite].anims[anima][index].rwh.y)*scale.y,1));
-        model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
-        self.shaders[self.shaind].program["trans"].write(model);
-        
+        self.shaders[self.shaind].program["cam"].write(self.camT);
         self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
@@ -259,8 +184,9 @@ class Renderer:
         model = glm.scale(model,glm.vec3(tex.sprites[sprite].anims[anima][index].rwh.x*scale.x
                                         ,tex.sprites[sprite].anims[anima][index].rwh.y*scale.y,1))
         model = glm.translate(model,-glm.vec3(offset.x,offset.y,0));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
-        
+        self.shaders[self.shaind].program["cam"].write(self.camT);
         self.shaders[self.shaind].program["pos"].write(tex.sprites[sprite].anims[anima][index].xy);
         self.shaders[self.shaind].program["size"].write(tex.sprites[sprite].anims[anima][index].wh);
         self.shaders[self.shaind].render();
@@ -268,9 +194,10 @@ class Renderer:
     def s_rect(self, position, scale, color):#shrek XD
         model = glm.translate(glm.mat4(),glm.vec3(position,0));
         model = glm.scale(model,glm.vec3(scale,1));
+        self.shaders["solidcol"].program["proj"].write(sc.proj);
         self.shaders["solidcol"].program["trans"].write(model);
         self.shaders["solidcol"].program["col"].write(color);
-        
+        self.shaders["solidcol"].program["cam"].write(self.camT);
         self.shaders["solidcol"].render();
         
     def draw_simple_poly(self, points,color):#shrek XD
@@ -281,7 +208,9 @@ class Renderer:
         color_data = self.get_data(vertices=colors,indices=indices);
         self.polyvbo.write(np.hstack([vertex_data,color_data]).tobytes());
         model = glm.translate(glm.mat4(),glm.vec3(0,0,0));
+        self.shaders["polygon"].program["proj"].write(sc.proj);
         self.shaders["polygon"].program["trans"].write(model);
+        self.shaders["polygon"].program["cam"].write(self.camT);
         self.shaders["polygon"].render();
         
     def draw_poly(self, points,colors):#shrek XD
@@ -292,5 +221,7 @@ class Renderer:
         color_data = self.get_data(vertices=colors,indices=indices);
         self.polyvbo.write(np.hstack([vertex_data,color_data]).tobytes());
         model = glm.translate(glm.mat4(),glm.vec3(0,0,0));
+        self.shaders["polygon"].program["proj"].write(sc.proj);
         self.shaders["polygon"].program["trans"].write(model);
+        self.shaders["polygon"].program["cam"].write(self.camT);
         self.shaders["polygon"].render();

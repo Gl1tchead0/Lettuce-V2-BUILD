@@ -28,6 +28,7 @@ def load_sounds(files):
     #files = glob.glob('assets/sounds/*.ogg');
     for file in files:
         sounds[file[0]] = pg.mixer.Sound(file[1]);
+        sounds[file[0]].set_volume(sc.trueVol);
         print("el sonido: "+file[0]+"; se cargo correctamente we.");
         
 def update_sounds_vol():
