@@ -51,10 +51,11 @@ def refresh_screen():
 
 def loadState(state):
     sc.state = il.import_module("states."+state).State();
-    fondo2load, sprites2load, sounds2load = sc.state.load();
+    fondo2load, sprites2load, sounds2load, models2load = sc.state.load();
     ass.load_backgrounds(fondo2load)
     ass.load_sprites(sprites2load)
     ass.load_sounds(sounds2load)
+    ass.load_models(models2load);
     sc.deltatime = 0;
 
 if __name__ == '__main__':

@@ -26,12 +26,13 @@ class State:
         fondo2load = [];
         sprites2load = [];
         sounds2load = [];
+        models2load = [];
         
         sc.mp.change_audio_a("assets/songs/menu.ogg");
         
         fondo2load.append(("logo",'assets/images/PyFunk.png'));
 
-        return fondo2load, sprites2load, sounds2load;
+        return fondo2load, sprites2load, sounds2load,models2load;
 
     def update(self,keypress):
         if keypress == sc.config["keys"]["menu up"] or keypress == sc.config["keys"]["menu up"]:

@@ -225,3 +225,12 @@ class Renderer:
         self.shaders["polygon"].program["trans"].write(model);
         self.shaders["polygon"].program["cam"].write(self.camT);
         self.shaders["polygon"].render();
+
+    def draw_model(self, modelo, texture, matrix=glm.mat4x4()):
+        sc.ctx.enable(sc.ctx.DEPTH_TEST | sc.ctx.CULL_FACE);
+        tex.textures[texture].use(0);
+        tex.models[modelo].program["proj"].write(sc.proj);
+        tex.models[modelo].program["cam"].write(self.camT);
+        tex.models[modelo].program["trans"].write(matrix);
+        tex.models[modelo].render();
+        sc.ctx.disable(sc.ctx.DEPTH_TEST | sc.ctx.CULL_FACE);

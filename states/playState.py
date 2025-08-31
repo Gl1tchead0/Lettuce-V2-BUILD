@@ -102,7 +102,7 @@ class State:
         sorted(self.events,key=lambda x: x[0], reverse=True);
         self.stage = il.import_module("stages."+chart["song"]["stage"]).Stage();
         #cargar los assets
-        fondo2load,sprites2load,sounds2load = self.stage.load();
+        fondo2load,sprites2load,sounds2load,models2load = self.stage.load();
 
         self.bfP = glm.vec2(bfJs["position"][0],bfJs["position"][1]);
         self.bfS = bfJs["scale"];
@@ -139,7 +139,7 @@ class State:
         sounds2load.append(("int3",'assets/sounds/intro3.ogg'));
         sounds2load.append(("intG",'assets/sounds/introGo.ogg'));
 
-        return fondo2load, sprites2load,sounds2load;
+        return fondo2load, sprites2load,sounds2load,models2load;
 
     def update(self,keypress):
         if self.pausa:

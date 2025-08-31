@@ -1,0 +1,8 @@
+//que shaders usa
+v_s unlit
+f_s unlit
+//informacion que requiere
+d_t 2f 3f
+d_n in_textcoord_0
+d_n in_position
+//no borrar esta linea

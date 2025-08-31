@@ -13,10 +13,16 @@ class Stage:
         fondo2load = [];
         sprites2load = [];
         sounds2load = [];
+        models2load = [];
+
         fondo2load.append(("piso" ,'assets/images/tomachiFondo/pisoPisoRap.png'));
         fondo2load.append(("arbustos" ,'assets/images/tomachiFondo/pisoRap.png'));
         fondo2load.append(("fuente" ,'assets/images/tomachiFondo/fuente_y_cartel.png'));
-        return fondo2load,sprites2load,sounds2load;
+        fondo2load.append(("steve" ,'assets/images/steve.png'));
+
+        models2load.append(("steve","assets/models/steve"));
+        
+        return fondo2load,sprites2load,sounds2load,models2load;
     def update(self):
         #weas de la camara
         if self.lookBF:
@@ -49,6 +55,8 @@ class Stage:
     def draw(self):
         sc.ctx.clear(color=(1,1,1));
         sc.render.draw_background("piso",glm.vec2(-600,500));
+        model = glm.scale(glm.mat4x4(),glm.vec3(500,500,500))
+        sc.render.draw_model("steve","steve",model);
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;

@@ -1,0 +1,15 @@
+#version 330 core
+
+layout (location = 0) in vec2 in_textcoord_0;
+layout (location = 1) in vec3 in_position;
+
+out vec2 uv;
+
+uniform mat4 proj;
+uniform mat4 cam;
+uniform mat4 trans;
+
+void main() { 
+    uv = in_textcoord_0;
+    gl_Position = proj * cam * trans * vec4(in_position, 1.0);
+}

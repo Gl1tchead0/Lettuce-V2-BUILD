@@ -32,8 +32,8 @@ proj = glm.ortho(0.0, 1280.0, 720.0, 0.0, -1000.0, 1000.0);
 
 texture3d = ctx.texture((1280,720), 3);
 texture3d.filter = (mgl.LINEAR, mgl.LINEAR);
-#drb = ctx.depth_renderbuffer((960,540));
-screen3d_fbo = ctx.framebuffer(color_attachments=[texture3d]);
+drb = ctx.depth_renderbuffer((1280,720));
+screen3d_fbo = ctx.framebuffer(color_attachments=[texture3d],depth_attachment=drb);
 
 render = ren.Renderer();
 
