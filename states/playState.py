@@ -205,18 +205,18 @@ class State:
         if self.curStep != self.lastStep:
             if self.songPos < 0:
                 if self.curStep == -4:
-                    self.intro.x = 0;
-                    self.intro.y = 1;
                     ass.sounds["int3"].play();
                 if self.curStep == -3:
-                    self.intro.x = 1;
+                    self.intro.x = 0;
                     self.intro.y = 1;
                     ass.sounds["int2"].play();
                 if self.curStep == -2:
-                    self.intro.x = 2;
+                    self.intro.x = 1;
                     self.intro.y = 1;
                     ass.sounds["int1"].play();
                 if self.curStep == -1:
+                    self.intro.x = 2;
+                    self.intro.y = 1;
                     ass.sounds["intG"].play();
         self.lastStep = self.curStep;
 
@@ -420,7 +420,7 @@ class State:
         sc.mp.VOLUME_A = sc.trueVol;
         sc.mp.VOLUME_B = sc.trueVol;
         
-        self.intro.y = max(self.intro.y-sc.deltatime*6,0);
+        self.intro.y = max(self.intro.y-sc.deltatime*3,0);
         self.stage.update();
     
     def draw(self):
@@ -440,6 +440,9 @@ class State:
             
     def drawHUD(self):
         #hud mierdas
+        sc.render.camT = glm.translate(glm.mat4x4(),glm.vec3(640,480,0));
+        sc.render.camT = glm.scale(sc.render.camT,glm.vec3(self.hudZoom));
+        sc.render.camT = glm.translate(sc.render.camT,-glm.vec3(640,480,0));
         #sc.render.cam = glm.vec4(0,0,0,self.hudZoom);
         finalAcur = 100;
         if self.acuCoun > 0:
@@ -502,7 +505,7 @@ class State:
         sc.render.shaind = "sprite";
 
         if self.pausa:
-            sc.render.s_rect(glm.vec2(0,0),glm.vec2(1280,720),glm.vec4(0,0,0,0.5));
+            sc.render.s_rect(glm.vec2(0,0),glm.vec2(1280,720),glm.vec4(0,0,0,0.8));
             opciones = [
                 "resume",
                 "restart",
