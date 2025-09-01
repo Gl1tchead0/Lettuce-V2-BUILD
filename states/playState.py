@@ -7,6 +7,7 @@ from engine import sprites as spr;
 from engine import assets as ass;
 from engine import musicPlayer as mup;
 import importlib as il;
+import main;
 
 class State:
     def __init__(self):
@@ -47,6 +48,9 @@ class State:
                 self.notePoses.append(glm.vec2(112+130*i,92));
         self.noteVector = glm.vec2(0,0);
         self.pausa = False;
+        self.pauseOpt = 0;
+        self.songFrame = 0;
+        self.songFade = 0;
         
     def load(self):
         #cargar chart
@@ -142,8 +146,36 @@ class State:
         return fondo2load, sprites2load,sounds2load,models2load;
 
     def update(self,keypress):
-        if self.pausa:
-            self.pause(keypress);
+        if self.pausa:#pausa
+            if keypress == sc.config["keys"]["menu up"]:
+                self.pauseOpt = (self.pauseOpt-1)%3;
+            if keypress == sc.config["keys"]["menu down"]:
+                self.pauseOpt = (self.pauseOpt+1)%3;
+
+            if keypress == sc.config["keys"]["back"]:
+                sc.mp.change_audio_a('assets/songs/'+sc.song+"/inst.ogg");
+                sc.mp.change_audio_b('assets/songs/'+sc.song+"/voices.ogg");
+                sc.mp.stream_a.seek(self.songFrame);
+                sc.mp.stream_b.seek(self.songFrame);
+                self.pausa = False;
+            if keypress == sc.config["keys"]["accept"]:
+                if self.pauseOpt == 0:
+                    sc.mp.change_audio_a('assets/songs/'+sc.song+"/inst.ogg");
+                    sc.mp.change_audio_b('assets/songs/'+sc.song+"/voices.ogg");
+                    sc.mp.stream_a.seek(self.songFrame);
+                    sc.mp.stream_b.seek(self.songFrame);
+                    self.pausa = False;
+                elif self.pauseOpt == 1:
+                    main.loadState("playState");
+                    return True;
+                else:
+                    main.loadState("menuState");
+                    return True;
+
+            self.songFade = min(1,self.songFade+sc.deltatime*0.1);
+
+            sc.mp.VOLUME_A = (self.songFade*self.songFade)*sc.trueVol;
+            sc.mp.VOLUME_B = 0;
             return;
         
         self.songPos += sc.deltatime;
@@ -160,8 +192,14 @@ class State:
             
         missS = ["mis1","mis2","mis3"];
         
-        if keypress == sc.config["keys"]["accept"]:
-            pass;
+        if keypress == sc.config["keys"]["accept"] or keypress == sc.config["keys"]["back"]:
+            self.songFrame = sc.mp.stream_a.tell();
+            sc.mp.VOLUME_A = 0;
+            sc.mp.VOLUME_B = 0;
+            self.songFade = 0;
+            sc.mp.change_audio_a('assets/songs/pausa.ogg');
+            sc.mp.change_audio_b('assets/songs/pausa.ogg');
+            self.pausa = True;
         #weas del beat
         self.curStep = glm.floor((semiSongPos*self.bpm)*0.01666666666666666666666666666667);
         if self.curStep != self.lastStep:
@@ -384,9 +422,6 @@ class State:
         
         self.intro.y = max(self.intro.y-sc.deltatime*6,0);
         self.stage.update();
-        
-    def pause(self,keypress):
-        pass;
     
     def draw(self):
         #fondo mierdas
@@ -449,11 +484,15 @@ class State:
                 sc.render.shaders["longNote"].program["img2"].write(glm.vec4(ass.sprites["notes"].anims[anima2][0].xy,ass.sprites["notes"].anims[anima2][0].wh));
                 sc.render.shaders["longNote"].render();
         notesNames = ["purple","blue","green","red","purple","blue","green","red"];
+        cant = 0;
         for note in self.chart:
-            if note[2]:
+            if note[2] and cant < 100:
                 notePos = note[0]-self.songPos;
+                cant += 1;
                 sc.render.draw_offset_scale("notes",notesNames[note[1]],0,self.notePoses[note[1]]+self.stage.modChart(notePos*400*self.speed),glm.vec2(0.8,0.8),glm.vec2(0.5,0.5));
-
+            #else:
+            #    break;
+            
         sc.render.shaind = "blend";
         sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.ratingAlpha));
         sc.render.draw("hud",self.rating,0,glm.vec2(640,360+self.ratingAlpha*100),glm.vec2(0.5,0.5));
@@ -461,3 +500,19 @@ class State:
         sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,self.intro.y));
         sc.render.draw_scale("hud","intro",int(glm.floor(self.intro.x)),glm.vec2(640,360),glm.vec2(0.8+self.intro.y*0.2),glm.vec2(0.5,0.5));
         sc.render.shaind = "sprite";
+
+        if self.pausa:
+            sc.render.s_rect(glm.vec2(0,0),glm.vec2(1280,720),glm.vec4(0,0,0,0.5));
+            opciones = [
+                "resume",
+                "restart",
+                "menu"
+            ];
+            for i in range(len(opciones)):
+                pos = 352+16*(i-self.pauseOpt);
+                tono = max(0,min(1-abs((pos-352)*0.01),1));
+                if i == self.pauseOpt:
+                    sc.render.draw_text(None,opciones[i],glm.vec2(75,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
+                else:
+                    sc.render.draw_text(None,opciones[i],glm.vec2(64,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
+            sc.render.draw_text(None,"pausa",glm.vec2(64,232),glm.vec3(0.7,0.7,0.7),10,16,aling="left");

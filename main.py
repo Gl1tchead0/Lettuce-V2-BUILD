@@ -31,7 +31,7 @@ def refresh():
 
     sc.state.draw();
     sc.screen_fbo.use();
-    sc.ctx.clear(color=(0,0,0,0));
+    sc.ctx.clear(0,0,0,0)
     sc.proj = glm.ortho(0.0, 1280.0, 720.0, 0.0, -1000.0, 1000.0);
     sc.render.camT = glm.mat4x4();
     sc.state.drawHUD();
@@ -50,6 +50,7 @@ def refresh_screen():
     sc.render.draw_screen(sc.texture);
 
 def loadState(state):
+    sc.state = None;
     sc.state = il.import_module("states."+state).State();
     fondo2load, sprites2load, sounds2load, models2load = sc.state.load();
     ass.load_backgrounds(fondo2load)

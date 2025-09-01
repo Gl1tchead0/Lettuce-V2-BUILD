@@ -35,9 +35,9 @@ class State:
         return fondo2load, sprites2load, sounds2load,models2load;
 
     def update(self,keypress):
-        if keypress == sc.config["keys"]["menu up"] or keypress == sc.config["keys"]["menu up"]:
+        if keypress == sc.config["keys"]["menu up"]:
             self.select = (self.select-1)%self.long;
-        if keypress == sc.config["keys"]["menu down"] or keypress == sc.config["keys"]["menu down"]:
+        if keypress == sc.config["keys"]["menu down"]:
             self.select = (self.select+1)%self.long;
             
         if keypress == sc.config["keys"]["back"]:
@@ -48,7 +48,7 @@ class State:
                 self.menu = 0;
                 self.long = 2;
                 sc.save_data();
-            elif self.menu == 3:
+            elif self.menu == 3: 
                 self.menu = 2;
                 self.long = 4;
             self.select = 0;
@@ -191,7 +191,7 @@ class State:
                 "back"
             ];
         
-        sc.render.s_rect(glm.vec2(0),glm.vec2(1280,720),glm.vec4(0,0,0,0.5));
+        sc.render.s_rect(glm.vec2(0),glm.vec2(1280,720),glm.vec4(0,0,0,1));
         
         if self.menu == 4:
             sc.render.draw_text(None,"(Press the key you want to set)",glm.vec2(64,352),glm.vec3(0.7,0.7,0.7),10,16,aling="left");

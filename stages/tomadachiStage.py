@@ -1,5 +1,7 @@
 import glm;
 import pygame as pg;
+import moderngl as mgl;
+from engine import assets as ass;
 from engine import screen as sc;
 
 class Stage:
@@ -9,6 +11,8 @@ class Stage:
         self.cmf = 0;
         self.lookBF = True;
         self.cmo = glm.vec2(0);
+        
+        self.rotSt = 0;
     def load(self):
         fondo2load = [];
         sprites2load = [];
@@ -24,6 +28,8 @@ class Stage:
         
         return fondo2load,sprites2load,sounds2load,models2load;
     def update(self):
+        ass.textures["steve"].filter = (mgl.NEAREST, mgl.NEAREST);
+        self.rotSt += sc.deltatime;
         #weas de la camara
         if self.lookBF:
             if sc.state.bfA == "idle":
@@ -55,8 +61,12 @@ class Stage:
     def draw(self):
         sc.ctx.clear(color=(1,1,1));
         sc.render.draw_background("piso",glm.vec2(-600,500));
-        model = glm.scale(glm.mat4x4(),glm.vec3(500,500,500))
-        sc.render.draw_model("steve","steve",model);
+        for i in range(20):
+            model = glm.translate(glm.mat4x4(),glm.vec3(400+i*200,500,0));
+            model = glm.rotate(model,glm.radians(180),glm.vec3(1,0,0));
+            model = glm.rotate(model,self.rotSt,glm.vec3(0,1,0));
+            model = glm.scale(model,glm.vec3(300,300,300))
+            sc.render.draw_model("steve","steve",model);
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;
