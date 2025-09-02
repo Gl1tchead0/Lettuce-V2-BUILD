@@ -61,12 +61,12 @@ class Stage:
     def draw(self):
         sc.ctx.clear(color=(1,1,1));
         sc.render.draw_background("piso",glm.vec2(-600,500));
-        for i in range(20):
-            model = glm.translate(glm.mat4x4(),glm.vec3(i*100,500,0));
-            model = glm.rotate(model,glm.radians(180),glm.vec3(1,0,0));
-            model = glm.rotate(model,(self.rotSt+i)*i,glm.vec3(1,1,1));
-            model = glm.scale(model,glm.vec3(300,300,300))
-            sc.render.draw_model("steve","steve",model);
+        #for i in range(20):
+        #    model = glm.translate(glm.mat4x4(),glm.vec3(i*100,500,0));
+        #    model = glm.rotate(model,glm.radians(180),glm.vec3(1,0,0));
+        #    model = glm.rotate(model,(self.rotSt+i)*i,glm.vec3(1,1,1));
+        #    model = glm.scale(model,glm.vec3(300,300,300))
+        #    sc.render.draw_model("steve","steve",model);
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;

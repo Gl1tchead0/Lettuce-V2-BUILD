@@ -21,6 +21,8 @@ class State:
         self.curBeat = 0;
         self.lastStep = 0;
         self.curStep = 0;
+        self.stepOfset = 0;
+        self.timeOffset = 0;
         self.live = 50;
         
         self.intro = glm.vec2(0,0);
@@ -77,6 +79,8 @@ class State:
         self.songPos = -5*60/self.bpm;
         self.speed = chart["song"]["speed"];i = 0;
         for sect in chart["song"]["notes"]:
+            if sect["changeBPM"]:
+                self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,[["Change bpm",sect["bpm"]]]]);
             if sect["mustHitSection"]:
                 for note in sect["sectionNotes"]:
                     self.chart.append([note[0]*0.001,note[1],True]);
@@ -201,7 +205,7 @@ class State:
             sc.mp.change_audio_b('assets/songs/pausa.ogg');
             self.pausa = True;
         #weas del beat
-        self.curStep = glm.floor((semiSongPos*self.bpm)*0.01666666666666666666666666666667);
+        self.curStep = self.stepOfset+glm.floor(((semiSongPos-self.timeOffset)*self.bpm)*0.01666666666666666666666666666667);
         if self.curStep != self.lastStep:
             if self.songPos < 0:
                 if self.curStep == -4:
@@ -410,7 +414,13 @@ class State:
         if self.curEven < len(self.events):
             if self.events[self.curEven][0] < self.songPos:
                 for even in self.events[self.curEven][1]:
-                    self.stage.onEvent(even[0],even[1],even[2]);
+                    if even[0] == "Change bpm":
+                        self.bpm = even[1];
+                        print("se cambio w")
+                        self.stepOfset = self.curStep;
+                        self.timeOffset = self.songPos;
+                    else:
+                        self.stage.onEvent(even[0],even[1],even[2]);
                 self.curEven += 1;
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(2*sc.deltatime);
