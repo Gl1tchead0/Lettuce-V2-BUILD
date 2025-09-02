@@ -191,6 +191,10 @@ class State:
                 sc.mp.stream_b.seek(0);
         else:
             semiSongPos = sc.mp.stream_a.tell() / sc.mp.stream_a.samplerate;
+            if self.songPos < semiSongPos-10:
+                #terminar la song
+                main.loadState("menuState");
+                return True;
             if self.songPos < semiSongPos-0.2 or self.songPos > semiSongPos+0.2:
                 self.songPos = semiSongPos;
             
@@ -416,7 +420,6 @@ class State:
                 for even in self.events[self.curEven][1]:
                     if even[0] == "Change bpm":
                         self.bpm = even[1];
-                        print("se cambio w")
                         self.stepOfset = self.curStep;
                         self.timeOffset = self.songPos;
                     else:
