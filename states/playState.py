@@ -191,7 +191,7 @@ class State:
                 sc.mp.stream_b.seek(0);
         else:
             semiSongPos = sc.mp.stream_a.tell() / sc.mp.stream_a.samplerate;
-            if self.songPos < semiSongPos-10:
+            if semiSongPos >= (sc.mp.stream_a.frames_total / sc.mp.stream_a.samplerate) - 0.1:
                 #terminar la song
                 main.loadState("menuState");
                 return True;
