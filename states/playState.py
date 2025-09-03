@@ -23,7 +23,9 @@ class State:
         self.curStep = 0;
         self.stepOfset = 0;
         self.timeOffset = 0;
-        self.live = 50;
+        self.live = 1;
+
+        self.bump = 1;
         
         self.intro = glm.vec2(0,0);
         
@@ -117,6 +119,7 @@ class State:
         self.bfD = {};
         self.bfA = "idle";
         self.bfF = 0;
+        self.bfC = glm.vec3(bfJs["healthbar_colors"][0]/255,bfJs["healthbar_colors"][1]/255,bfJs["healthbar_colors"][2]/255);
         self.bfPosing = 0;
         for anim in bfJs["animations"]:
             self.bfD[anim["anim"]] = (anim["name"],glm.vec2(anim["offsets"][0],anim["offsets"][1]));
@@ -130,6 +133,7 @@ class State:
         self.dadA = "idle";
         self.dadF = 0;
         self.dadPosing = 0;
+        self.dadC = glm.vec3(dadJs["healthbar_colors"][0]/255,dadJs["healthbar_colors"][1]/255,dadJs["healthbar_colors"][2]/255);
         for anim in dadJs["animations"]:
             self.dadD[anim["anim"]] = (anim["name"],glm.vec2(anim["offsets"][0],anim["offsets"][1]));
         sprites2load.append(("dad",'assets/images/'+dadJs["image"]));
@@ -137,6 +141,11 @@ class State:
         
         sprites2load.append(("notes",'assets/images/NOTE_assets'));
         sprites2load.append(("hud",'assets/images/hudWeas'));
+
+        fondo2load.append(("icon1","assets/images/icons/"+dadJs["healthicon"]+".png"))
+        fondo2load.append(("icon2","assets/images/icons/"+bfJs["healthicon"]+".png"))
+        fondo2load.append(("icon1l","assets/images/icons/"+dadJs["healthicon"]+"-lose.png"))
+        fondo2load.append(("icon2l","assets/images/icons/"+bfJs["healthicon"]+"-lose.png"))
         
         sounds2load.append(("mis1",'assets/sounds/missnote1.ogg'));
         sounds2load.append(("mis2",'assets/sounds/missnote2.ogg'));
@@ -238,6 +247,7 @@ class State:
             if self.bfPosing == 0:
                 self.bfA = "idle";
                 self.bfF = 0;
+            self.bump = 1.3;
         self.lastBeat = self.curBeat;
         
         #controles del jugador
@@ -275,6 +285,7 @@ class State:
                             self.pressed[note[2]] = -1;
                             self.bfPosing = 0.25;
                             self.bfF = 0;
+                            self.live += 0.025;
                             if note[2]-4 == 0:
                                 self.bfA = "singLEFT";
                             elif note[2]-4 == 1:
@@ -298,6 +309,7 @@ class State:
                                     self.acuCoun += 1;
                                     self.misses += 1;
                                     self.bfPosing = 0.25;
+                                    self.live -= 0.05;
                                     self.bfF = 0;
                                     if note[2] == 0:
                                         self.bfA = "singLEFTmiss";
@@ -309,6 +321,7 @@ class State:
                                         self.bfA = "singRIGHTmiss";
                             self.pressed[note[2]] = -1;
                             self.bfPosing = 0.25;
+                            self.live += 0.025;
                             self.bfF = 0;
                             if note[2] == 0:
                                 self.bfA = "singLEFT";
@@ -345,6 +358,7 @@ class State:
                     self.acuCoun += 1;
                     self.misses += 1;
                     self.bfPosing = 0.25;
+                    self.live -= 0.05;
                     self.bfF = 0;
                     if note[1] == 0:
                         self.bfA = "singLEFTmiss";
@@ -360,6 +374,7 @@ class State:
                             note[2] = False;
                             self.pressed[note[1]] = -1;
                             self.bfPosing = 0.25;
+                            self.live += 0.025;
                             self.bfF = 0;
                             if note[1] == 0:
                                 self.bfA = "singLEFT";
@@ -377,6 +392,7 @@ class State:
                             inputs[note[1]] = False;
                             self.score += glm.floor(350*notePos);
                             self.acurasi += 1-notePos;
+                            self.live += 0.025;
                             self.acuCoun += 1;
                             if notePos > 0.6:#Shit
                                 self.ratingAlpha = 1;
@@ -428,6 +444,11 @@ class State:
         #zooms del hud
         self.hudZoom += (1-self.hudZoom)*(2*sc.deltatime);
         self.ratingAlpha = max(self.ratingAlpha-sc.deltatime,0);
+
+        self.bump += (1-self.bump)*(7*sc.deltatime);
+
+        #limites y perder
+        self.live = min(2,self.live);
         
         #boludeces del volumen
         sc.mp.VOLUME_A = sc.trueVol;
@@ -463,6 +484,13 @@ class State:
         sc.render.draw_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
         if sc.config["botplay"]:
             sc.render.draw_text(None,"(BOTPLAY)",glm.vec2(640,30),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+        #dibujar barra de vida
+        sc.render.s_rect(glm.vec2(320,630),glm.vec2(640,20),glm.vec4(0,0,0,1));
+        sc.render.s_rect(glm.vec2(325,635),glm.vec2(630,10),glm.vec4(self.bfC,1));
+        sc.render.s_rect(glm.vec2(325,635),glm.vec2(630*((2-self.live)*0.5),10),glm.vec4(self.dadC,1));
+        sc.render.draw_back_scale("icon1",glm.vec3(955-315*self.live-70,645,0),glm.vec2(self.bump),glm.vec2(0.5));
+        sc.render.draw_back_scale("icon2",glm.vec3(955-315*self.live+70,645,0),glm.vec2(-self.bump,self.bump),glm.vec2(0.5));
+
         notesNames = ["arrowLEFT","arrowDOWN","arrowUP","arrowRIGHT","left press","down press","up press","right press","left confirm","down confirm","up confirm","right confirm"];
         for i in range(len(self.notePoses)):
             if self.pressed[i] == 0:

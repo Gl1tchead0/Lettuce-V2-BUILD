@@ -110,8 +110,8 @@
 	"healthicon": "draw",
 	"flip_x": true,
 	"healthbar_colors": [
-		161,
-		161,
+		80,
+		0,
 		161
 	],
 	"camera_position": [

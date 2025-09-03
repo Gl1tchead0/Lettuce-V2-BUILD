@@ -124,8 +124,22 @@ class Renderer:
     def draw_background(self, fondo,position):
         tex.textures[fondo].use(0);
         
-        model = glm.translate(glm.mat4(),glm.vec3(position,0));
+        model = glm.translate(glm.mat4(),position);
         model = glm.scale(model,glm.vec3(tex.textures[fondo].size[0],tex.textures[fondo].size[1],1));
+        self.shaders[self.shaind].program["proj"].write(sc.proj);
+        self.shaders[self.shaind].program["trans"].write(model);
+        self.shaders[self.shaind].program["cam"].write(self.camT);
+        self.shaders[self.shaind].program["pos"].write(glm.vec2(0,0));
+        self.shaders[self.shaind].program["size"].write(glm.vec2(1,1));
+        
+        self.shaders[self.shaind].render();
+    
+    def draw_back_scale(self, fondo,position,scale,offset=glm.vec2(0,0)):
+        tex.textures[fondo].use(0);
+        
+        model = glm.translate(glm.mat4(),position);
+        model = glm.scale(model,glm.vec3(tex.textures[fondo].size[0]*scale.x,tex.textures[fondo].size[1]*scale.y,1));
+        model = glm.translate(model,glm.vec3(-offset,0));
         self.shaders[self.shaind].program["proj"].write(sc.proj);
         self.shaders[self.shaind].program["trans"].write(model);
         self.shaders[self.shaind].program["cam"].write(self.camT);

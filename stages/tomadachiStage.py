@@ -60,7 +60,7 @@ class Stage:
         #sc.render.camP.w = 0.6;
     def draw(self):
         sc.ctx.clear(color=(1,1,1));
-        sc.render.draw_background("piso",glm.vec2(-600,500));
+        sc.render.draw_background("piso",glm.vec3(-600,500,0));
         #for i in range(20):
         #    model = glm.translate(glm.mat4x4(),glm.vec3(i*100,500,0));
         #    model = glm.rotate(model,glm.radians(180),glm.vec3(1,0,0));

@@ -205,4 +205,4 @@ class State:
                     sc.render.draw_text(None,opciones[i],glm.vec2(64,pos),glm.vec3(tono,tono,tono),10,16,aling="left");
             sc.render.draw_text(None,menu_text,glm.vec2(64,232),glm.vec3(0.7,0.7,0.7),10,16,aling="left");
         
-        sc.render.draw_background("logo",glm.vec2(700,32));
+        sc.render.draw_background("logo",glm.vec3(700,32,0));
