@@ -81,9 +81,13 @@ if __name__ == '__main__':
                     if sc.fulScr:
                         sc.win = pg.display.set_mode(sc.real_res,flags=pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE);
                         sc.fulScr = False;
+                        sc.real_res = (1280,720);
+                        sc.ctx.screen.viewport = (0,0,1280,720);
                     else:
-                        sc.win = pg.display.set_mode(sc.real_res,flags=pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE | pg.FULLSCREEN);
+                        sc.win = pg.display.set_mode((0,0),flags=pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE | pg.FULLSCREEN);
                         sc.fulScr = True;
+                        sc.real_res = (pg.display.Info().current_w,pg.display.Info().current_h);
+                        sc.ctx.screen.viewport = (0,0,pg.display.Info().current_w,pg.display.Info().current_h);
         
                 if event.key == sc.config["keys"]["vol-"]:
                     sc.config["volumen"] = max(0,sc.config["volumen"]-0.1);
