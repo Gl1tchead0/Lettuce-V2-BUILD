@@ -77,10 +77,13 @@ if __name__ == '__main__':
                 sys.exit();
             if event.type == pg.KEYDOWN:
                 keypress = event.key;
-                if event.key == sc.config["keys"]["menu left"]: p_L = True;
-                if event.key == sc.config["keys"]["menu down"]: p_D = True;
-                if event.key == sc.config["keys"]["menu up"]:   p_U = True;
-                if event.key == sc.config["keys"]["menu right"]:p_R = True;
+                if event.key == pg.K_F11:
+                    if sc.fulScr:
+                        sc.win = pg.display.set_mode(sc.real_res,flags=pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE);
+                        sc.fulScr = False;
+                    else:
+                        sc.win = pg.display.set_mode(sc.real_res,flags=pg.OPENGL | pg.DOUBLEBUF | pg.RESIZABLE | pg.FULLSCREEN);
+                        sc.fulScr = True;
         
                 if event.key == sc.config["keys"]["vol-"]:
                     sc.config["volumen"] = max(0,sc.config["volumen"]-0.1);

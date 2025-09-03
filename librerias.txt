@@ -4,3 +4,4 @@ numpy
 PyGLM
 sounddevice
 soundfile
+pywavefront

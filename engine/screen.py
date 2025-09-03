@@ -74,6 +74,8 @@ botplay = True;
 trueVol = config["volumen"]*config["volumen"];
 mp = mup.musicPlayer("assets/songs/menu.ogg",trueVol);
 
+fulScr = False;
+
 #pg.event.set_grab(True);
 
 #font = pg.font.Font("assets/Moderniz.otf",12);

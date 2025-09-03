@@ -285,7 +285,7 @@ class State:
                             self.pressed[note[2]] = -1;
                             self.bfPosing = 0.25;
                             self.bfF = 0;
-                            self.live += 0.025;
+                            #self.live += 0.025;
                             if note[2]-4 == 0:
                                 self.bfA = "singLEFT";
                             elif note[2]-4 == 1:
@@ -321,7 +321,7 @@ class State:
                                         self.bfA = "singRIGHTmiss";
                             self.pressed[note[2]] = -1;
                             self.bfPosing = 0.25;
-                            self.live += 0.025;
+                            #self.live += 0.025;
                             self.bfF = 0;
                             if note[2] == 0:
                                 self.bfA = "singLEFT";
@@ -449,6 +449,9 @@ class State:
 
         #limites y perder
         self.live = min(2,self.live);
+        if self.live < 0 or keypress == pg.K_r:
+            main.loadState("gameoverState");
+            return True;
         
         #boludeces del volumen
         sc.mp.VOLUME_A = sc.trueVol;
@@ -481,15 +484,22 @@ class State:
         finalAcur = 100;
         if self.acuCoun > 0:
             finalAcur = (self.acurasi/self.acuCoun)*100;
-        sc.render.draw_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+        if sc.config["downscroll"]:
+            sc.render.draw_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,688),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+        else:
+            sc.render.draw_text(None,"Score:"+str(int(self.score))+" - Misses:"+str(int(self.misses))+" - Accuracy:"+f"{finalAcur:.2f}%",glm.vec2(640,0),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+
         if sc.config["botplay"]:
-            sc.render.draw_text(None,"(BOTPLAY)",glm.vec2(640,30),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
+            sc.render.draw_text(None,"(BOTPLAY)",glm.vec2(640,self.notePoses[0].y-16),glm.vec3(0.7,0.7,0.7),10,16,aling="center");
         #dibujar barra de vida
-        sc.render.s_rect(glm.vec2(320,630),glm.vec2(640,20),glm.vec4(0,0,0,1));
-        sc.render.s_rect(glm.vec2(325,635),glm.vec2(630,10),glm.vec4(self.bfC,1));
-        sc.render.s_rect(glm.vec2(325,635),glm.vec2(630*((2-self.live)*0.5),10),glm.vec4(self.dadC,1));
-        sc.render.draw_back_scale("icon1",glm.vec3(955-315*self.live-70,645,0),glm.vec2(self.bump),glm.vec2(0.5));
-        sc.render.draw_back_scale("icon2",glm.vec3(955-315*self.live+70,645,0),glm.vec2(-self.bump,self.bump),glm.vec2(0.5));
+        poy = 630;
+        if sc.config["downscroll"]:
+            poy = 50;
+        sc.render.s_rect(glm.vec2(320,poy),glm.vec2(640,20),glm.vec4(0,0,0,1));
+        sc.render.s_rect(glm.vec2(325,poy+5),glm.vec2(630,10),glm.vec4(self.bfC,1));
+        sc.render.s_rect(glm.vec2(325,poy+5),glm.vec2(630*((2-self.live)*0.5),10),glm.vec4(self.dadC,1));
+        sc.render.draw_back_scale("icon1",glm.vec3(955-315*self.live-70,poy+15,0),glm.vec2(self.bump),glm.vec2(0.5));
+        sc.render.draw_back_scale("icon2",glm.vec3(955-315*self.live+70,poy+15,0),glm.vec2(-self.bump,self.bump),glm.vec2(0.5));
 
         notesNames = ["arrowLEFT","arrowDOWN","arrowUP","arrowRIGHT","left press","down press","up press","right press","left confirm","down confirm","up confirm","right confirm"];
         for i in range(len(self.notePoses)):
