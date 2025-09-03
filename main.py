@@ -6,6 +6,7 @@ from engine import sprites as spr;
 from engine import screen as sc;
 from engine import assets as ass;
 import importlib as il;
+import gc;
 
 volAnim = -60;
 
@@ -57,6 +58,7 @@ def loadState(state):
     ass.load_sprites(sprites2load)
     ass.load_sounds(sounds2load)
     ass.load_models(models2load);
+    gc.collect();
     sc.deltatime = 0;
 
 if __name__ == '__main__':
@@ -67,6 +69,7 @@ if __name__ == '__main__':
     sc.vcrTex = sc.ctx.texture(size=image.get_size(), components=4, data=pg.image.tostring(image,"RGBA"));
     sc.vcrTex.filter = (mgl.LINEAR, mgl.LINEAR);
     sc.vcrSpr = spr.Sprite('assets/images/vcr.xml',sc.vcrTex.size);
+    beep = pg.mixer.Sound('assets/sounds/beep.ogg');
     del image;
     
     while True:
@@ -91,13 +94,13 @@ if __name__ == '__main__':
                     sc.config["volumen"] = max(0,sc.config["volumen"]-0.1);
                     sc.trueVol = sc.config["volumen"]*sc.config["volumen"];
                     ass.update_sounds_vol();
-                    ass.sounds["beep"].play();
+                    beep.play();
                     volAnim = 150;
                 if event.key == sc.config["keys"]["vol+"]:
                     sc.config["volumen"] = min(1,sc.config["volumen"]+0.1);
                     sc.trueVol = sc.config["volumen"]*sc.config["volumen"];
                     ass.update_sounds_vol();
-                    ass.sounds["beep"].play();
+                    beep.play();
                     volAnim = 150;
             if event.type == pg.VIDEORESIZE:
                 width, height = event.size;

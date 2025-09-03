@@ -7,11 +7,12 @@ from engine import screen as sc;
 
 textures = {};
 sprites = {};
-sounds = {"beep":pg.mixer.Sound('assets/sounds/beep.ogg')};
+sounds = {};
 models = {};
 
 def load_backgrounds(files):
     #files = glob.glob('assets/backgrounds/*.png');
+    textures.clear();
     for file in files:
         image = pg.image.load(file[1]).convert_alpha();
         textures[file[0]] = sc.ctx.texture(size=image.get_size(), components=4, data=pg.image.tostring(image,"RGBA"));
@@ -20,6 +21,7 @@ def load_backgrounds(files):
 
 def load_sprites(files):
     #files = glob.glob('assets/sprites/*.png');
+    sprites.clear();
     for file in files:
         image = pg.image.load(file[1]+'.png').convert_alpha();
         textures[file[0]] = sc.ctx.texture(size=image.get_size(), components=4, data=pg.image.tostring(image,"RGBA"));
@@ -29,12 +31,14 @@ def load_sprites(files):
         
 def load_sounds(files):
     #files = glob.glob('assets/sounds/*.ogg');
+    sounds.clear();
     for file in files:
         sounds[file[0]] = pg.mixer.Sound(file[1]);
         sounds[file[0]].set_volume(sc.trueVol);
         print("el sonido: "+file[0]+"; se cargo correctamente we.");
 
 def load_models(files):
+    models.clear();
     for file in files:
         #cargar vertices
         obj = pw.Wavefront(file[1]+".obj",create_materials=True,parse=True);

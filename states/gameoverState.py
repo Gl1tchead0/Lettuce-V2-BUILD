@@ -23,6 +23,7 @@ class State:
 
         sc.mp.change_audio_a("assets/songs/gameOver.ogg");
         sc.mp.change_audio_b("assets/songs/gameOver.ogg");
+        sc.mp.paused = False;
 
         return fondo2load, sprites2load, sounds2load,models2load;
 

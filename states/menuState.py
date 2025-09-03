@@ -29,6 +29,9 @@ class State:
         models2load = [];
         
         sc.mp.change_audio_a("assets/songs/menu.ogg");
+        sc.mp.change_audio_b("assets/songs/menu.ogg");
+
+        sc.mp.paused = False;
         
         fondo2load.append(("logo",'assets/images/PyFunk.png'));
 
