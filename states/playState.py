@@ -86,11 +86,7 @@ class State:
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,note[1],1]);
                 if mustHitSection != sect["mustHitSection"]:
-                    if "sectionBeats" in sect:
-                        self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
-                                        [["Change look",True,0],["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
-                    else:
-                        self.events.append([((i*4)/self.bpm)*60,
+                    self.events.append([((i*sect.get("sectionBeats",4))/self.bpm)*60,
                                         [["Change look",True,0],["Camera look at pos",bfJs["camera_position"][0],bfJs["camera_position"][1]]]]);
             else:
                 for note in sect["sectionNotes"]:
@@ -98,11 +94,7 @@ class State:
                     if note[2] > 0:
                         self.longChart.append([note[0]*0.001,(note[0]+note[2])*0.001,(note[1]+4)%8,1]);
                 if mustHitSection != sect["mustHitSection"]:
-                    if "sectionBeats" in sect:
-                        self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,
-                                        [["Change look",False,0],["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
-                    else:
-                        self.events.append([((i*4)/self.bpm)*60,
+                    self.events.append([((i*sect.get("sectionBeats",4))/self.bpm)*60,
                                         [["Change look",False,0],["Camera look at pos",dadJs["camera_position"][0],dadJs["camera_position"][1]]]]);
             mustHitSection = sect["mustHitSection"];
             i += 1;

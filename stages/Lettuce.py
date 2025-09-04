@@ -3,37 +3,33 @@ from engine import screen as sc;
 
 class Stage:
     def __init__(self):
-        self.cmp = glm.vec2(1100,480);
+        self.cmp = glm.vec2(640,360);
         self.cmr = glm.vec2(0);
         self.cmf = 0;
         self.lookBF = True;
         self.cmo = glm.vec2(0);
-        
-        self.facuF = 0;
-        self.skiF = 0;
-        self.tomF = 0;
-        self.ruberF = 0;
-        self.zeuhF = 0;
-        self.ihanF = 0;
+
+        self.shadDadA = {"idle": "PeacockIdle",
+                         "singLEFT": "PeacockLeft",
+                         "singDOWN": "PeacockDown",
+                         "singUP": "PeacockUp",
+                         "singRIGHT": "PeacockRight"};
+        self.shadBFA = {"idle": "IDLE",
+                         "singLEFT": "LEFT",
+                         "singDOWN": "DOWN",
+                         "singUP": "UP",
+                         "singRIGHT": "RIGHT",
+                         "singLEFTmiss": "leftmiss",
+                         "singDOWNmiss": "downmiss",
+                         "singUPmiss": "upmiss",
+                         "singRIGHTmiss": "misright"};
         
     def load(self):
-        fondo2load = [("juan", "assets/images/tipicos/juan.png")];
-        sprites2load = [("ski", "assets/images/tipicos/ski_e"), ("facu", "assets/images/tipicos/facuFNF"),
-                        ("tom", "assets/images/tipicos/Tompoops"), ("ruber", "assets/images/tipicos/Ruber"),
-                        ("zeu", "assets/images/tipicos/Zeuz"), ("jest", "assets/images/tipicos/fuckyou")];
-        sounds2load = [];
-        models2load = [];
+        fondo2load = [("piso", "assets/images/juaneFondo/piso.png")];
+        sprites2load = [("bfS", "assets/images/bf reflej"), ("lS", "assets/images/letu reflej")];
         
-        return fondo2load,sprites2load,sounds2load,models2load;
+        return fondo2load, sprites2load, [], [];
     def update(self):
-        if sc.state.curBeat != sc.state.lastBeat:
-            if sc.state.curBeat % 1 == 0:
-                self.zeuhF = 0;
-                self.skiF = 0;
-                self.facuF = 0;
-                self.tomF = 0;
-                self.ruberF = 0;
-        
         #weas de la camara
         if self.lookBF:
             if sc.state.bfA == "idle":
@@ -57,30 +53,22 @@ class Stage:
                 self.cmo += (glm.vec2(0,-30)-self.cmo)*(5*sc.deltatime);
             elif sc.state.dadA == "singDOWN":
                 self.cmo += (glm.vec2(0,30)-self.cmo)*(5*sc.deltatime);
+
         sc.render.camR.z = -self.cmo.x*0.001;
         self.cmf = max(self.cmf-sc.deltatime*3,0)
         sc.render.camP.xy = self.cmp + self.cmr * glm.cos(self.cmf) + self.cmo;
-        sc.render.camP.z = -360*1.4;
-        #sc.render.camP.w = 0.6;
-
+        sc.render.camP.z = -360*1.6;
     def draw(self):
         sc.ctx.clear(color=(1,1,1));
 
-        self.zeuhF = min(self.zeuhF+sc.deltatime*24, 15);
-        sc.render.draw("zeu", "Zeuz Idle", int(self.zeuhF), glm.vec2(740, 360));
-        self.skiF = min(self.skiF+sc.deltatime*24, 13);
-        sc.render.draw("ski", "BF idle dance", int(self.skiF), glm.vec2(1000,400));
-        self.facuF = min(self.facuF+sc.deltatime*24, 13);
-        sc.render.draw_scale("facu", "facuFNF idle", int(self.facuF), glm.vec2(1300,150), glm.vec2(-1,1));
-        self.ruberF = min(self.ruberF+sc.deltatime*24, 29);
-        sc.render.draw_scale("ruber", "Ruber_idle", int(self.ruberF), glm.vec2(1300,200), glm.vec2(0.8));
-        self.tomF = min(self.tomF+sc.deltatime*24, 13);
-        sc.render.draw("tom", "Tom idle", int(self.tomF), glm.vec2(-200,180));
-        sc.render.draw_scale("jest", "fuckyou idle", 0, glm.vec2(550,100)-sc.render.camP.xy*0.1, glm.vec2(1.2));
+        sc.render.shaind = "juanePiso";
+        sc.render.shaders["juanePiso"].program["scroll"].value = sc.render.camP.x*0.001;
+        sc.render.draw_back_scale("piso", glm.vec3(-1300+sc.render.camP.x, 400,0), glm.vec2(8,2));
+        #REEMPLAZAR POR PISO 3D
 
-        sc.render.shaind = "blend";
-        sc.render.shaders["blend"].program["color"].write(glm.vec4(1,1,1,0.2));
-        sc.render.draw_background("juan", glm.vec3(1200, 900,0));
+        sc.render.shaind = "sprite";
+        sc.render.draw("lS", self.shadDadA[sc.state.dadA], int(sc.state.dadF), glm.vec2(-312,550));
+        sc.render.draw("bfS", self.shadBFA[sc.state.bfA], int(sc.state.bfF), glm.vec2(765,700));
     def onEvent(self,type,val1,val2):
         if type == "Change look":
             self.lookBF = val1;

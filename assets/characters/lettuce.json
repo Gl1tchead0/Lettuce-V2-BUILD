@@ -114,7 +114,7 @@
 	"no_antialiasing": false,
 	"image": "characters/lettuce",
 	"position": [
-		-410,
+		-310,
 		-50
 	],
 	"healthicon": "lettuce",
@@ -125,8 +125,8 @@
 		102
 	],
 	"camera_position": [
-		110,
-		70
+		310,
+		400
 	],
 	"sing_duration": 6.1,
 	"scale": 1
