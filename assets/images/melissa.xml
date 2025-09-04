@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="melissa.png">
+	<!-- Created with Adobe Animate version 23.0.2.103 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="meli0000" x="10" y="10" width="348" height="612" frameX="-14" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0001" x="10" y="10" width="348" height="612" frameX="-14" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0002" x="368" y="10" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0003" x="368" y="10" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0004" x="740" y="10" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0005" x="1054" y="10" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0006" x="1368" y="10" width="331" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0007" x="1368" y="10" width="331" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0008" x="1709" y="10" width="345" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0009" x="1709" y="10" width="345" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0010" x="2064" y="10" width="334" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0011" x="2064" y="10" width="334" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0012" x="2408" y="10" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0013" x="2408" y="10" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0014" x="2722" y="10" width="348" height="612" frameX="-14" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0015" x="2722" y="10" width="348" height="612" frameX="-14" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0016" x="3080" y="10" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0017" x="3080" y="10" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0018" x="3452" y="10" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0019" x="10" y="632" width="331" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0020" x="351" y="632" width="336" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0021" x="351" y="632" width="336" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0022" x="697" y="632" width="350" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0023" x="697" y="632" width="350" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0024" x="1057" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0025" x="1371" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0026" x="1371" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0027" x="1685" y="632" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0028" x="1685" y="632" width="362" height="612" frameX="0" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0029" x="2057" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0030" x="2057" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0031" x="2371" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0032" x="2371" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0033" x="2685" y="632" width="331" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0034" x="2685" y="632" width="331" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0035" x="3026" y="632" width="315" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0036" x="3026" y="632" width="315" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0037" x="3351" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0038" x="3351" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+	<SubTexture name="meli0039" x="3665" y="632" width="304" height="612" frameX="-58" frameY="0" frameWidth="408" frameHeight="612"/>
+</TextureAtlas>

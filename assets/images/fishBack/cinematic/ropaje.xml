@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="ropaje.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="ropaje0000" x="0" y="0" width="939" height="703" pivotX="-694.95" pivotY="-1113.4" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0001" x="0" y="0" width="939" height="703" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0002" x="0" y="0" width="939" height="703" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0003" x="939" y="0" width="944" height="687" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0004" x="939" y="0" width="944" height="687" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0005" x="1883" y="0" width="933" height="692" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0006" x="1883" y="0" width="933" height="692" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0007" x="1883" y="0" width="933" height="692" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0008" x="2816" y="0" width="931" height="690" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0009" x="2816" y="0" width="931" height="690" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0010" x="2816" y="0" width="931" height="690" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0011" x="2816" y="0" width="931" height="690" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0012" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0013" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0014" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0015" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0016" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0017" x="0" y="703" width="934" height="695" frameX="0" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0018" x="934" y="703" width="969" height="700" frameX="-133" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0019" x="934" y="703" width="969" height="700" frameX="-133" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0020" x="934" y="703" width="969" height="700" frameX="-133" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0021" x="934" y="703" width="969" height="700" frameX="-133" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0022" x="934" y="703" width="969" height="700" frameX="-133" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0023" x="1903" y="703" width="929" height="700" frameX="-153" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0024" x="1903" y="703" width="929" height="700" frameX="-153" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0025" x="1903" y="703" width="929" height="700" frameX="-153" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0026" x="2832" y="703" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0027" x="2832" y="703" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0028" x="0" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0029" x="0" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0030" x="0" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0031" x="921" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0032" x="921" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0033" x="921" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+	<SubTexture name="ropaje0034" x="921" y="1406" width="921" height="703" frameX="-157" frameY="0" frameWidth="1102" frameHeight="703"/>
+</TextureAtlas>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="fishamiguis.png">
+	<!-- Created with Adobe Animate version 24.0.7.61 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="amiguisfish0000" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0001" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0002" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0003" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0004" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0005" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0006" x="0" y="672" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0007" x="0" y="672" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0008" x="0" y="672" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0009" x="0" y="672" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0010" x="0" y="672" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0011" x="0" y="672" width="1074" height="672"/>
+</TextureAtlas>

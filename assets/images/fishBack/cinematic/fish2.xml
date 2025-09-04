@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="fish2.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="fish20000" x="0" y="0" width="217" height="301" pivotX="-1183.5" pivotY="-1325.55" frameX="-58" frameY="0" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20001" x="217" y="0" width="293" height="218" frameX="0" frameY="-89" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20002" x="217" y="0" width="293" height="218" frameX="0" frameY="-89" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20003" x="510" y="0" width="214" height="283" frameX="-55" frameY="-59" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20004" x="724" y="0" width="240" height="307" frameX="-31" frameY="-42" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20005" x="724" y="0" width="240" height="307" frameX="-31" frameY="-42" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20006" x="0" y="307" width="202" height="319" frameX="-39" frameY="-36" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20007" x="0" y="307" width="202" height="319" frameX="-39" frameY="-36" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20008" x="202" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20009" x="202" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20010" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20011" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20012" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20013" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20014" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20015" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20016" x="610" y="307" width="204" height="302" frameX="-41" frameY="-51" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20017" x="610" y="307" width="204" height="302" frameX="-41" frameY="-51" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20018" x="0" y="307" width="202" height="319" frameX="-39" frameY="-36" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20019" x="0" y="307" width="202" height="319" frameX="-39" frameY="-36" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20020" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20021" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20022" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20023" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+	<SubTexture name="fish20024" x="406" y="307" width="204" height="325" frameX="-49" frameY="-34" frameWidth="293" frameHeight="359"/>
+</TextureAtlas>

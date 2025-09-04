@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="pico.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="copia pico 10000" x="0" y="0" width="779" height="420" pivotX="2.2" pivotY="121.45"/>
+	<SubTexture name="copia pico 10001" x="0" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10002" x="0" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10003" x="779" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10004" x="779" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10005" x="1558" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10006" x="2337" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10007" x="2337" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10008" x="0" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10009" x="0" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10010" x="3116" y="0" width="779" height="420"/>
+	<SubTexture name="copia pico 10011" x="0" y="420" width="776" height="420" frameX="-3" frameY="0" frameWidth="779" frameHeight="420"/>
+	<SubTexture name="copia pico 10012" x="776" y="420" width="776" height="420" frameX="-3" frameY="0" frameWidth="779" frameHeight="420"/>
+	<SubTexture name="copia pico 10013" x="1552" y="420" width="776" height="420" frameX="-3" frameY="0" frameWidth="779" frameHeight="420"/>
+	<SubTexture name="copia pico 10014" x="2328" y="420" width="776" height="419" frameX="-3" frameY="0" frameWidth="779" frameHeight="420"/>
+	<SubTexture name="copia pico 10015" x="3104" y="420" width="779" height="420"/>
+	<SubTexture name="pico 10000" x="0" y="840" width="777" height="420" pivotX="0" pivotY="121.45"/>
+	<SubTexture name="pico 10001" x="0" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10002" x="0" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10003" x="777" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10004" x="777" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10005" x="1554" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10006" x="2331" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10007" x="2331" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10008" x="0" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10009" x="0" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10010" x="3108" y="840" width="777" height="420"/>
+	<SubTexture name="pico 10011" x="0" y="1260" width="777" height="420"/>
+	<SubTexture name="pico 10012" x="777" y="1260" width="777" height="420"/>
+	<SubTexture name="pico 10013" x="1554" y="1260" width="777" height="420"/>
+	<SubTexture name="pico 10014" x="2331" y="1260" width="777" height="419" frameX="0" frameY="0" frameWidth="777" frameHeight="420"/>
+	<SubTexture name="pico 10015" x="3108" y="1260" width="777" height="420"/>
+</TextureAtlas>

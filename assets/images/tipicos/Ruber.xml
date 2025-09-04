@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Ruber.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Ruber_idle0000" x="0" y="0" width="338" height="810" pivotX="110.35" pivotY="0.05" frameX="-13" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0001" x="338" y="0" width="339" height="810" frameX="-12" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0002" x="677" y="0" width="345" height="809" frameX="-8" frameY="-1" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0003" x="1022" y="0" width="360" height="803" frameX="0" frameY="-6" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0004" x="1382" y="0" width="355" height="804" frameX="-3" frameY="-5" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0005" x="1737" y="0" width="353" height="806" frameX="-4" frameY="-3" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0006" x="2090" y="0" width="349" height="806" frameX="-6" frameY="-3" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0007" x="2439" y="0" width="346" height="807" frameX="-8" frameY="-2" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0008" x="2785" y="0" width="343" height="809" frameX="-10" frameY="-1" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0009" x="3128" y="0" width="342" height="808" frameX="-11" frameY="-1" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0010" x="3470" y="0" width="339" height="809" frameX="-13" frameY="-1" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0011" x="0" y="810" width="338" height="810" frameX="-14" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0012" x="338" y="810" width="337" height="810" frameX="-14" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0013" x="675" y="810" width="336" height="810" frameX="-15" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0014" x="1011" y="810" width="336" height="810" frameX="-15" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0015" x="1347" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0016" x="1682" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0017" x="2017" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0018" x="2352" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0019" x="2687" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0020" x="3022" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0021" x="3357" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0022" x="3692" y="810" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0023" x="0" y="1620" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0024" x="335" y="1620" width="335" height="810" frameX="-16" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0025" x="670" y="1620" width="336" height="810" frameX="-15" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0026" x="1006" y="1620" width="336" height="810" frameX="-15" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0027" x="1342" y="1620" width="337" height="810" frameX="-14" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0028" x="1679" y="1620" width="337" height="810" frameX="-14" frameY="0" frameWidth="360" frameHeight="810"/>
+	<SubTexture name="Ruber_idle0029" x="0" y="0" width="338" height="810" frameX="-13" frameY="0" frameWidth="360" frameHeight="810"/>
+</TextureAtlas>

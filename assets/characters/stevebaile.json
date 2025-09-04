@@ -1,0 +1,47 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-59,
+				163
+			],
+			"loop": false,
+			"fps": 32,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "bailedown"
+		},
+		{
+			"offsets": [
+				-79,
+				171
+			],
+			"loop": false,
+			"fps": 32,
+			"anim": "singUP",
+			"indices": [],
+			"name": "baileup"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/stevebaile",
+	"position": [
+		0,
+		420
+	],
+	"healthicon": "ste",
+	"flip_x": false,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		0,
+		-180
+	],
+	"sing_duration": 4,
+	"scale": 1.7,
+	"_editor_isPlayer": false
+}

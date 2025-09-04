@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="fishamiguitos.png">
+	<!-- Created with Adobe Animate version 24.0.7.61 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="amiguisfish0000" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0001" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0002" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0003" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0004" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0005" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0006" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0007" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0008" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0009" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0010" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0011" x="1074" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0012" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0013" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0014" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0015" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0016" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0017" x="0" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0018" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0019" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0020" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0021" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0022" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="amiguisfish0023" x="2148" y="0" width="1074" height="672"/>
+	<SubTexture name="baile0000" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0001" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0002" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0003" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0004" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0005" x="0" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0006" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0007" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0008" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0009" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0010" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0011" x="1074" y="672" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0012" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0013" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0014" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0015" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0016" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0017" x="2148" y="672" width="1074" height="673" frameX="0" frameY="0" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0018" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0019" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0020" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0021" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0022" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+	<SubTexture name="baile0023" x="0" y="1345" width="1074" height="670" frameX="-1" frameY="-3" frameWidth="1075" frameHeight="673"/>
+</TextureAtlas>

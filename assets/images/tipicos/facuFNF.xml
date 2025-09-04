@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="facuFNF.png"><SubTexture name="facuFNF idle0000" x="1717" y="0" width="398" height="618" frameX="-394" frameY="-77" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0001" x="1717" y="0" width="398" height="618" frameX="-394" frameY="-77" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0002" x="984" y="693" width="372" height="633" frameX="-418" frameY="-62" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0003" x="984" y="693" width="372" height="633" frameX="-418" frameY="-62" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0004" x="629" y="693" width="355" height="646" frameX="-434" frameY="-49" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0005" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0006" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0007" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0008" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0009" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0010" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0011" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0012" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF idle0013" x="593" y="0" width="340" height="661" frameX="-448" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF left0000" x="933" y="0" width="386" height="661" frameX="-401" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF left0001" x="933" y="0" width="386" height="661" frameX="-401" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF left0002" x="933" y="0" width="386" height="661" frameX="-401" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF left0003" x="1319" y="0" width="398" height="661" frameX="-388" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF left0004" x="1319" y="0" width="398" height="661" frameX="-388" frameY="-34" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF down0000" x="1356" y="693" width="332" height="630" frameX="-460" frameY="-65" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF down0001" x="1356" y="693" width="332" height="630" frameX="-460" frameY="-65" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF down0002" x="1356" y="693" width="332" height="630" frameX="-460" frameY="-65" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF down0003" x="1717" y="618" width="337" height="611" frameX="-460" frameY="-84" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF down0004" x="1717" y="618" width="337" height="611" frameX="-460" frameY="-84" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF up0000" x="289" y="0" width="304" height="685" frameX="-477" frameY="-10" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF up0001" x="289" y="0" width="304" height="685" frameX="-477" frameY="-10" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF up0002" x="289" y="0" width="304" height="685" frameX="-477" frameY="-10" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF up0003" x="0" y="0" width="289" height="693" frameX="-487" frameY="-1" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF up0004" x="0" y="0" width="289" height="693" frameX="-487" frameY="-1" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF right0000" x="0" y="693" width="324" height="656" frameX="-469" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF right0001" x="0" y="693" width="324" height="656" frameX="-469" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF right0002" x="0" y="693" width="324" height="656" frameX="-469" frameY="-39" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF right0003" x="324" y="693" width="305" height="652" frameX="-494" frameY="-43" frameWidth="1280" frameHeight="720" />
+<SubTexture name="facuFNF right0004" x="324" y="693" width="305" height="652" frameX="-494" frameY="-43" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="nube.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="qwqf0000" x="0" y="0" width="51" height="46" pivotX="193.95" pivotY="221.85" frameX="-21" frameY="-462" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0001" x="51" y="0" width="85" height="77" frameX="-4" frameY="-446" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0002" x="136" y="0" width="93" height="85" frameX="0" frameY="-442" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0003" x="136" y="0" width="93" height="85" frameX="0" frameY="-442" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0004" x="136" y="0" width="93" height="85" frameX="0" frameY="-442" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0005" x="136" y="0" width="93" height="85" frameX="0" frameY="-442" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0006" x="136" y="0" width="93" height="85" frameX="0" frameY="-442" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0007" x="229" y="0" width="161" height="133" frameX="0" frameY="-394" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0008" x="390" y="0" width="194" height="160" frameX="0" frameY="-367" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0009" x="584" y="0" width="208" height="172" frameX="0" frameY="-355" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0010" x="584" y="0" width="208" height="172" frameX="0" frameY="-355" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0011" x="584" y="0" width="208" height="172" frameX="0" frameY="-355" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0012" x="792" y="0" width="612" height="487" frameX="0" frameY="-40" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0013" x="0" y="487" width="656" height="521" frameX="0" frameY="-6" frameWidth="664" frameHeight="527"/>
+	<SubTexture name="qwqf0014" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0015" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0016" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0017" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0018" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0019" x="656" y="487" width="664" height="527"/>
+	<SubTexture name="qwqf0020" x="656" y="487" width="664" height="527"/>
+</TextureAtlas>

@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				329,
+				170
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "lucabetaleft",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				331,
+				172
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "lucabetadown",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				331,
+				172
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "lucabetaright",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				331,
+				172
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "lucabetaidle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				331,
+				172
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "lucabetaright",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/lucahoddie",
+	"position": [
+		1400,
+		440
+	],
+	"healthicon": "none",
+	"flip_x": false,
+	"healthbar_colors": [
+		0,
+		0,
+		0
+	],
+	"camera_position": [
+		1400,
+		550
+	],
+	"sing_duration": 6.1,
+	"scale": 0.6
+}

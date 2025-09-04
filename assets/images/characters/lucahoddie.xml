@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="lucahoddie.png">
+	<!-- Created with Adobe Animate version 22.0.2.168 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="lucabetadown0000" x="0" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0001" x="1920" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0002" x="3840" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0003" x="3840" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0004" x="1920" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0005" x="0" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetadown0006" x="1920" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0000" x="5760" y="0" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0001" x="0" y="1080" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0002" x="1920" y="1080" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0003" x="3840" y="1080" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0004" x="5760" y="1080" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0005" x="0" y="2160" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0006" x="1920" y="2160" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0007" x="3840" y="2160" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0008" x="5760" y="2160" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0009" x="0" y="3240" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0010" x="1920" y="3240" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0011" x="3840" y="3240" width="1920" height="1080"/>
+	<SubTexture name="lucabetaidle0012" x="5760" y="3240" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0000" x="0" y="4320" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0001" x="1920" y="4320" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0002" x="3840" y="4320" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0003" x="5760" y="4320" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0004" x="0" y="5400" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0005" x="1920" y="5400" width="1920" height="1080"/>
+	<SubTexture name="lucabetaleft0006" x="1920" y="4320" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0000" x="3840" y="5400" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0001" x="5760" y="5400" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0002" x="0" y="6480" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0003" x="1920" y="6480" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0004" x="3840" y="6480" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0005" x="3840" y="6480" width="1920" height="1080"/>
+	<SubTexture name="lucabetaright0006" x="5760" y="6480" width="1920" height="1080"/>
+</TextureAtlas>

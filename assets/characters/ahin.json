@@ -1,0 +1,58 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "normal"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "normal 1",
+			"indices": [],
+			"name": "normal 1"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "guittarra1",
+			"indices": [],
+			"name": "guittarra1"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/ahin",
+	"position": [
+		150,
+		50
+	],
+	"healthicon": "bf",
+	"flip_x": false,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		370,
+		60
+	],
+	"sing_duration": 6.1,
+	"scale": 0.75,
+	"_editor_isPlayer": false
+}

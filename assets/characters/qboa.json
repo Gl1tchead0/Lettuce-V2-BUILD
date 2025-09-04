@@ -1,0 +1,95 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				56,
+				-151
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				-44,
+				-256
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				-125,
+				-143
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				-93,
+				-140
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-58,
+				-153
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "idle",
+			"indices": [
+				0,
+				0,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/qbo",
+	"position": [
+		-210,
+		-230
+	],
+	"healthicon": "qbo",
+	"flip_x": false,
+	"healthbar_colors": [
+		204,
+		204,
+		204
+	],
+	"camera_position": [
+		0,
+		220
+	],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": false
+}

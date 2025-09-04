@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Zeuz.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Zeuz Idle0000" x="10" y="10" width="210" height="397" frameX="-14" frameY="-36" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0001" x="10" y="10" width="210" height="397" frameX="-14" frameY="-36" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0002" x="230" y="10" width="208" height="408" frameX="-9" frameY="-25" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0003" x="230" y="10" width="208" height="408" frameX="-9" frameY="-25" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0004" x="448" y="10" width="214" height="416" frameX="-7" frameY="-17" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0005" x="448" y="10" width="214" height="416" frameX="-7" frameY="-17" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0006" x="672" y="10" width="220" height="422" frameX="-5" frameY="-11" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0007" x="672" y="10" width="220" height="422" frameX="-5" frameY="-11" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0008" x="10" y="442" width="228" height="430" frameX="-2" frameY="-3" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0009" x="10" y="442" width="228" height="430" frameX="-2" frameY="-3" frameWidth="230" frameHeight="433"/>
+	<SubTexture name="Zeuz Idle0010" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Idle0011" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Idle0012" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Idle0013" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Idle0014" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Idle0015" x="248" y="442" width="230" height="433"/>
+	<SubTexture name="Zeuz Rigth0000" x="488" y="442" width="228" height="437" frameX="0" frameY="0" frameWidth="242" frameHeight="437"/>
+	<SubTexture name="Zeuz Rigth0001" x="488" y="442" width="228" height="437" frameX="0" frameY="0" frameWidth="242" frameHeight="437"/>
+	<SubTexture name="Zeuz Rigth0002" x="726" y="442" width="221" height="437" frameX="-21" frameY="0" frameWidth="242" frameHeight="437"/>
+	<SubTexture name="Zeuz Rigth0003" x="726" y="442" width="221" height="437" frameX="-21" frameY="0" frameWidth="242" frameHeight="437"/>
+	<SubTexture name="Zeuz down0000" x="10" y="889" width="221" height="371" frameX="0" frameY="-3" frameWidth="221" frameHeight="374"/>
+	<SubTexture name="Zeuz down0001" x="10" y="889" width="221" height="371" frameX="0" frameY="-3" frameWidth="221" frameHeight="374"/>
+	<SubTexture name="Zeuz down0002" x="241" y="889" width="219" height="374" frameX="0" frameY="0" frameWidth="221" frameHeight="374"/>
+	<SubTexture name="Zeuz down0003" x="241" y="889" width="219" height="374" frameX="0" frameY="0" frameWidth="221" frameHeight="374"/>
+	<SubTexture name="Zeuz left0000" x="470" y="889" width="297" height="436" frameX="0" frameY="0" frameWidth="304" frameHeight="436"/>
+	<SubTexture name="Zeuz left0001" x="470" y="889" width="297" height="436" frameX="0" frameY="0" frameWidth="304" frameHeight="436"/>
+	<SubTexture name="Zeuz left0002" x="10" y="1335" width="294" height="436" frameX="-10" frameY="0" frameWidth="304" frameHeight="436"/>
+	<SubTexture name="Zeuz left0003" x="10" y="1335" width="294" height="436" frameX="-10" frameY="0" frameWidth="304" frameHeight="436"/>
+	<SubTexture name="Zeuz up0000" x="314" y="1335" width="206" height="445"/>
+	<SubTexture name="Zeuz up0001" x="314" y="1335" width="206" height="445"/>
+	<SubTexture name="Zeuz up0002" x="530" y="1335" width="206" height="434" frameX="0" frameY="-11" frameWidth="206" frameHeight="445"/>
+	<SubTexture name="Zeuz up0003" x="530" y="1335" width="206" height="434" frameX="0" frameY="-11" frameWidth="206" frameHeight="445"/>
+</TextureAtlas>

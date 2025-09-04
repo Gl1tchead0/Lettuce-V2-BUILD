@@ -1,0 +1,168 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				82,
+				109
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				61,
+				212
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up0"
+		},
+		{
+			"offsets": [
+				150,
+				127
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down0"
+		},
+		{
+			"offsets": [
+				69,
+				238
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "up miss"
+		},
+		{
+			"offsets": [
+				165,
+				124
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "down miss"
+		},
+		{
+			"offsets": [
+				45,
+				247
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "up alt0"
+		},
+		{
+			"offsets": [
+				28,
+				179
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "down alt0"
+		},
+		{
+			"offsets": [
+				63,
+				215
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT-alt",
+			"indices": [],
+			"name": "left alt0"
+		},
+		{
+			"offsets": [
+				65,
+				222
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT-alt",
+			"indices": [],
+			"name": "right alt0"
+		},
+		{
+			"offsets": [
+				10,
+				120
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "left0"
+		},
+		{
+			"offsets": [
+				734,
+				454
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "right0"
+		},
+		{
+			"offsets": [
+				210,
+				208
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"loop": false,
+			"name": "right miss"
+		},
+		{
+			"offsets": [
+				15,
+				195
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"loop": false,
+			"name": "left miss"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/bfs",
+	"position": [
+		-10,
+		330
+	],
+	"healthicon": "bfs",
+	"flip_x": true,
+	"healthbar_colors": [
+		75,
+		147,
+		178
+	],
+	"camera_position": [
+		220,
+		-110
+	],
+	"sing_duration": 6.1,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

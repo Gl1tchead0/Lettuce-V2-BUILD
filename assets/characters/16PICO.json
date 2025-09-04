@@ -1,0 +1,157 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-3,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				-37,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				80,
+				-27
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				-12,
+				54
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				-34,
+				19
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				68,
+				-4
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "missleft"
+		},
+		{
+			"offsets": [
+				85,
+				-11
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "missdown"
+		},
+		{
+			"offsets": [
+				-14,
+				54
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "missup"
+		},
+		{
+			"offsets": [
+				-32,
+				20
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "missright"
+		},
+		{
+			"offsets": [
+				-18,
+				16
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "hey"
+		},
+		{
+			"offsets": [
+				420,
+				80
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "die",
+			"indices": [],
+			"name": "die"
+		},
+		{
+			"offsets": [
+				416,
+				999
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "toma",
+			"indices": [],
+			"name": "toma"
+		}
+	],
+	"vocals_file": "",
+	"no_antialiasing": false,
+	"image": "characters/yo_mejor_me_void",
+	"position": [
+		70,
+		260
+	],
+	"healthicon": "pic",
+	"flip_x": true,
+	"healthbar_colors": [
+		248,
+		132,
+		63
+	],
+	"camera_position": [
+		570,
+		-2480
+	],
+	"sing_duration": 5.99999999999999,
+	"scale": 1,
+	"_editor_isPlayer": true
+}

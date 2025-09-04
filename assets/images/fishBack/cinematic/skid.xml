@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="skid.png">
+	<!-- Created with Adobe Animate version 24.0.5.40 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="asldl 20000" x="0" y="0" width="413" height="654" pivotX="8.5" pivotY="129.95" frameX="0" frameY="0" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20001" x="0" y="0" width="413" height="654" frameX="0" frameY="0" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20002" x="413" y="0" width="404" height="637" frameX="-8" frameY="-22" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20003" x="413" y="0" width="404" height="637" frameX="-8" frameY="-22" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20004" x="413" y="0" width="404" height="637" frameX="-8" frameY="-22" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20005" x="413" y="0" width="404" height="637" frameX="-8" frameY="-22" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="asldl 20006" x="413" y="0" width="404" height="637" frameX="-8" frameY="-22" frameWidth="413" frameHeight="659"/>
+	<SubTexture name="qweqweqwe0000" x="817" y="0" width="752" height="611" pivotX="4.7" pivotY="4" frameX="-4" frameY="-4" frameWidth="762" frameHeight="689"/>
+	<SubTexture name="qweqweqwe0001" x="0" y="654" width="762" height="650" frameX="0" frameY="0" frameWidth="762" frameHeight="689"/>
+	<SubTexture name="qweqweqwe0002" x="762" y="654" width="698" height="659" frameX="-33" frameY="-30" frameWidth="762" frameHeight="689"/>
+	<SubTexture name="qweqweqwe0003" x="0" y="1313" width="721" height="640" frameX="-25" frameY="-22" frameWidth="762" frameHeight="689"/>
+</TextureAtlas>

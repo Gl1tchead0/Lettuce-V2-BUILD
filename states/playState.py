@@ -72,16 +72,13 @@ class State:
             bfJs = json.load(file);
         with open('assets/characters/'+chart["song"]["player2"]+".json",'r') as file:
             dadJs = json.load(file);
-        if "events" in chart["song"]:
-            self.events = chart["song"]["events"];
-        else:
-            self.events = [];
+        self.events = [];
         self.curEven = 0;
         self.bpm = chart["song"]["bpm"];
         self.songPos = -5*60/self.bpm;
         self.speed = chart["song"]["speed"];i = 0;
         for sect in chart["song"]["notes"]:
-            if sect["changeBPM"]:
+            if sect.get("changeBPM"):
                 self.events.append([((i*sect["sectionBeats"])/self.bpm)*60,[["Change bpm",sect["bpm"]]]]);
             if sect["mustHitSection"]:
                 for note in sect["sectionNotes"]:
@@ -235,7 +232,6 @@ class State:
                     self.intro.x = 2;
                     self.intro.y = 1;
                     ass.sounds["intG"].play();
-        self.lastStep = self.curStep;
 
         self.curBeat = glm.floor(self.curStep*0.25);
         if self.curBeat != self.lastBeat:
@@ -248,7 +244,6 @@ class State:
                 self.bfA = "idle";
                 self.bfF = 0;
             self.bump = 1.3;
-        self.lastBeat = self.curBeat;
         
         #controles del jugador
         for i in range(0,len(self.pressed)):
@@ -459,13 +454,16 @@ class State:
         
         self.intro.y = max(self.intro.y-sc.deltatime*3,0);
         self.stage.update();
+
+        self.lastStep = self.curStep;
+        self.lastBeat = self.curBeat;
     
     def draw(self):
         #fondo mierdas
         #sc.render.cam = self.camGame;
-        self.shaind = "sprite";
+        sc.render.shaind = "sprite";
         self.stage.draw();
-        self.shaind = "sprite";
+        sc.render.shaind = "sprite";
         #personajes mierdas
         self.bfPosing = max(self.bfPosing-sc.deltatime,0);
         self.bfF = min(self.bfF+sc.deltatime*24,len(ass.sprites["bf"].anims[self.bfD[self.bfA][0]])-1);

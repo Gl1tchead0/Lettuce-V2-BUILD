@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="motito.png">
+	<!-- Created with Adobe Animate version 24.0.3.19 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="33" y="33" width="955" height="549" frameX="0" frameY="0" frameWidth="956" frameHeight="549"/>
+	<SubTexture name="idle0001" x="33" y="33" width="955" height="549" frameX="-1" frameY="0" frameWidth="956" frameHeight="549"/>
+	<SubTexture name="memm0000" x="1027" y="33" width="1285" height="908" frameX="-32" frameY="-647" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0001" x="1027" y="33" width="1285" height="908" frameX="-32" frameY="-647" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0002" x="1027" y="33" width="1285" height="908" frameX="-32" frameY="-647" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0003" x="2351" y="33" width="1288" height="893" frameX="-29" frameY="-659" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0004" x="2351" y="33" width="1288" height="893" frameX="-29" frameY="-659" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0005" x="3678" y="33" width="1295" height="864" frameX="-22" frameY="-695" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0006" x="5012" y="33" width="1298" height="844" frameX="-19" frameY="-712" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0007" x="5012" y="33" width="1298" height="844" frameX="-19" frameY="-712" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0008" x="6349" y="33" width="1292" height="849" frameX="-25" frameY="-707" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0009" x="6349" y="33" width="1292" height="849" frameX="-25" frameY="-707" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0010" x="6349" y="33" width="1292" height="849" frameX="-25" frameY="-707" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0011" x="33" y="980" width="1285" height="864" frameX="-32" frameY="-695" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0012" x="1357" y="980" width="1281" height="1018" frameX="-36" frameY="-524" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0013" x="2677" y="980" width="1224" height="1097" frameX="-93" frameY="-363" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0014" x="3940" y="980" width="1081" height="1088" frameX="-236" frameY="-372" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0015" x="5060" y="980" width="1043" height="1310" frameX="-274" frameY="-150" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0016" x="6142" y="980" width="1109" height="1427" frameX="-208" frameY="-33" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0017" x="33" y="2446" width="1148" height="1460" frameX="-169" frameY="0" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0018" x="1220" y="2446" width="1148" height="1460" frameX="-169" frameY="0" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0019" x="1220" y="2446" width="1148" height="1460" frameX="-169" frameY="0" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0020" x="2407" y="2446" width="1133" height="1449" frameX="-184" frameY="-11" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0021" x="2407" y="2446" width="1133" height="1449" frameX="-184" frameY="-11" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0022" x="3579" y="2446" width="1019" height="1325" frameX="-298" frameY="-135" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0023" x="4637" y="2446" width="955" height="870" frameX="-362" frameY="-590" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0024" x="5631" y="2446" width="995" height="809" frameX="-351" frameY="-675" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0025" x="5631" y="2446" width="995" height="809" frameX="-351" frameY="-675" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0026" x="6665" y="2446" width="965" height="823" frameX="-352" frameY="-647" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0027" x="6665" y="2446" width="965" height="823" frameX="-352" frameY="-647" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0028" x="33" y="3945" width="973" height="831" frameX="-361" frameY="-643" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0029" x="33" y="3945" width="973" height="831" frameX="-361" frameY="-643" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0030" x="1045" y="3945" width="986" height="845" frameX="-393" frameY="-631" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0031" x="1045" y="3945" width="986" height="845" frameX="-393" frameY="-631" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0032" x="2070" y="3945" width="1026" height="891" frameX="-435" frameY="-607" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0033" x="2070" y="3945" width="1026" height="891" frameX="-435" frameY="-607" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0034" x="3135" y="3945" width="1064" height="939" frameX="-694" frameY="-590" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0035" x="3135" y="3945" width="1064" height="939" frameX="-694" frameY="-590" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0036" x="4238" y="3945" width="1034" height="901" frameX="-1084" frameY="-627" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0037" x="4238" y="3945" width="1034" height="901" frameX="-1084" frameY="-627" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0038" x="5311" y="3945" width="982" height="841" frameX="-1825" frameY="-664" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0039" x="5311" y="3945" width="982" height="841" frameX="-1825" frameY="-664" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0040" x="6332" y="3945" width="955" height="810" frameX="-2904" frameY="-698" frameWidth="3859" frameHeight="1559"/>
+	<SubTexture name="memm0041" x="6332" y="3945" width="955" height="810" frameX="-2904" frameY="-698" frameWidth="3859" frameHeight="1559"/>
+</TextureAtlas>

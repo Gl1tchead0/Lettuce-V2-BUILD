@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="chickJ.png">
+	<!-- Created with Adobe Animate version 19.2.1.408 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="polla idle0000" x="25" y="25" width="370" height="575" frameX="0" frameY="-8" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0001" x="25" y="25" width="370" height="575" frameX="0" frameY="-8" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0002" x="420" y="25" width="366" height="578" frameX="-3" frameY="-5" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0003" x="420" y="25" width="366" height="578" frameX="-3" frameY="-5" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0004" x="25" y="628" width="361" height="582" frameX="-7" frameY="-1" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0005" x="25" y="628" width="361" height="582" frameX="-7" frameY="-1" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0006" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0007" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0008" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0009" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0010" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0011" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+	<SubTexture name="polla idle0012" x="411" y="628" width="362" height="583" frameX="-8" frameY="0" frameWidth="370" frameHeight="583"/>
+</TextureAtlas>
