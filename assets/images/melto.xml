@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="melto.png">
-	<!-- Created with Adobe Animate version 24.0.3.19 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="idle0000" x="20" y="20" width="411" height="294"/>
-	<SubTexture name="idle0001" x="20" y="20" width="411" height="294"/>
-	<SubTexture name="idle0002" x="451" y="20" width="411" height="294"/>
-	<SubTexture name="idle0003" x="451" y="20" width="411" height="294"/>
-</TextureAtlas>
