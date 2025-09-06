@@ -104,8 +104,8 @@
 	"no_antialiasing": false,
 	"image": "characters/draw",
 	"position": [
-		700,
-		100
+		100,
+		250
 	],
 	"healthicon": "draw",
 	"flip_x": true,
@@ -115,8 +115,8 @@
 		161
 	],
 	"camera_position": [
-		840,
-		390
+		240,
+		540
 	],
 	"sing_duration": 4,
 	"scale": 1,

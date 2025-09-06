@@ -60,8 +60,8 @@
 	"no_antialiasing": false,
 	"image": "characters/eder",
 	"position": [
-		-150,
-		100
+		-550,
+		250
 	],
 	"healthicon": "eder",
 	"flip_x": false,
@@ -71,8 +71,8 @@
 		161
 	],
 	"camera_position": [
-		540,
-		390
+		0,
+		540
 	],
 	"sing_duration": 4,
 	"scale": 1,
